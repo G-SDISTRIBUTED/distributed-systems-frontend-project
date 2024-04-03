@@ -11,7 +11,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Http;
 use Yajra\DataTables\CollectionDataTable;
 
 class ClientesDataTable extends DataTable
@@ -24,12 +24,12 @@ class ClientesDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): CollectionDataTable
     {
-        $client = new Client();
-        $response = $client->request('GET', 'URL_DEL_BACKEND');
-        $data = json_decode($response->getBody()->getContents(), true);
+        $response = Http::get('http://127.0.0.1:8000/api/clientes');
+        $jsonResponse = $response->json();
+        $clientes = isset($jsonResponse['data']) ? $jsonResponse['data'] : [];
 
      
-        $dataTable = new CollectionDataTable(collect($data));
+        $dataTable = new CollectionDataTable(collect($clientes));
 
         $dataTable->addColumn('action', 'clientes.action')
                   ->setRowId('id');
