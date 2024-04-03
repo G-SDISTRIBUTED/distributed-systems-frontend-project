@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Overspeed_report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8d215d67-79e0-4a3e-b1db-e12549e4ae7b">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dota"/>
+	<parameter name="INI_DATE" class="java.lang.String"/>
+	<parameter name="END_DATE" class="java.lang.String"/>
+	<parameter name="MAX_SPEED" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="VEHICLE_IDS" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{VEHICLE_IDS}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="subReport1" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT  *
+from z_vehicles_ids_selected($P{VEHICLE_IDS})]]>
+	</queryString>
+	<field name="vehicle_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="vehicle_id"/>
+	</field>
+	<field name="vehicle_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vehicle_name"/>
+	</field>
+	<field name="vehicle_plate" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vehicle_plate"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="49" splitType="Stretch">
+			<image>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="200" height="49" uuid="c48f3668-8d89-4f21-a5c2-b01e1594ea41"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="200" y="0" width="160" height="49" uuid="ab12cb6c-e51b-4eed-92b6-b61298f764d1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Exceso de Velocidad"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="75" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="30" width="555" height="45" uuid="76d28254-53ce-4d54-afcf-348cf1c96131"/>
+				<subreportParameter name="id">
+					<subreportParameterExpression><![CDATA[$F{vehicle_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="name">
+					<subreportParameterExpression><![CDATA[$F{vehicle_name}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="INI_DATE">
+					<subreportParameterExpression><![CDATA[$P{INI_DATE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="END_DATE">
+					<subreportParameterExpression><![CDATA[$P{END_DATE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="MAX_SPEED">
+					<subreportParameterExpression><![CDATA[$P{MAX_SPEED}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{subReport1}]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="62" y="0" width="100" height="15" uuid="3ae54653-c2a8-4d34-82cc-c4a164dac0ae"/>
+				<textFieldExpression><![CDATA[$F{vehicle_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="62" height="15" uuid="344a8762-70f8-4bb2-bc00-3d5e763587d8"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[GPS : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="62" height="15" uuid="d022798e-16ad-433c-9baf-28eabbda3826"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periodo : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="62" y="15" width="108" height="15" uuid="d168a61e-a381-46bb-9862-bb0113d9e53c"/>
+				<textFieldExpression><![CDATA[$P{INI_DATE}.replace( "'", " " )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="15" width="108" height="15" uuid="197efa81-aa27-40ca-91da-33e90c82a0d2"/>
+				<textFieldExpression><![CDATA[$P{END_DATE}.replace( "'", " " )]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

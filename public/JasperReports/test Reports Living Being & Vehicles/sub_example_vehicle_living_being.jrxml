@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_example_vehicle_living_being" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e1b519b3-2237-4161-b636-803b5492cff9">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dota"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.report.description"/>
+	<parameter name="tabla_id" class="java.lang.String"/>
+	<parameter name="tabla" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select *
+from test('$P!{tabla_id}','$P!{tabla}')]]>
+	</queryString>
+	<field name="imei" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="imei"/>
+	</field>
+	<field name="principal" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="principal"/>
+	</field>
+	<field name="titulo1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="titulo1"/>
+	</field>
+	<field name="respuesta1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="respuesta1"/>
+	</field>
+	<field name="titulo2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="titulo2"/>
+	</field>
+	<field name="respuesta2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="respuesta2"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="240" y="-21" width="340" height="60" uuid="a28e109d-fd7a-45eb-be13-00900c418af2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="26"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{principal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="-20" y="10" width="125" height="15" uuid="1203da30-867a-4fea-9ba2-2ce0c2bb3d9e"/>
+				<textFieldExpression><![CDATA[$F{titulo1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="105" y="10" width="100" height="15" uuid="880ca910-696a-42d8-9e71-38cb2c69ce62"/>
+				<textFieldExpression><![CDATA[$F{respuesta1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="-20" y="25" width="125" height="15" uuid="e4f791f9-43f4-49f8-b8dd-492fe9577be1"/>
+				<textFieldExpression><![CDATA[$F{titulo2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="105" y="25" width="100" height="15" uuid="366fa7f0-f29b-4864-88b1-fc4ce331eb03"/>
+				<textFieldExpression><![CDATA[$F{respuesta2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="78">
+			<subreport>
+				<reportElement x="-20" y="0" width="772" height="78" uuid="455600b6-57be-4462-9d85-614b1165bac6"/>
+				<subreportParameter name="imei">
+					<subreportParameterExpression><![CDATA[$F{imei}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["result_example_vehicle_living-being.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

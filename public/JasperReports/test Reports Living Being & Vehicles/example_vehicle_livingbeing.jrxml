@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="example_vehicle_livingbeing" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="380e01ce-694c-4a10-93f2-a3286d74419f">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dota"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="vehicles_id" class="java.lang.String"/>
+	<parameter name="living_being_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select '$P!{vehicles_id}' as vehicles_id,'$P!{living_being_id}' as living_id]]>
+	</queryString>
+	<field name="vehicles_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vehicles_id"/>
+	</field>
+	<field name="living_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="living_id"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="280" y="0" width="270" height="37" uuid="a13d3f27-104d-42f8-99c7-3307156a1285"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[EJEMPLO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="40">
+			<subreport isUsingCache="false">
+				<reportElement x="0" y="0" width="752" height="40" uuid="796b799b-f1df-4897-82c3-bf5b7b633656"/>
+				<subreportParameter name="tabla_id">
+					<subreportParameterExpression><![CDATA[$F{living_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tabla">
+					<subreportParameterExpression><![CDATA["living_being"]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["sub_example_vehicle_living_being.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="50">
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="0" y="0" width="752" height="50" uuid="59e74be4-db99-4768-ab40-a0872b8a50ad"/>
+				<subreportParameter name="tabla_id">
+					<subreportParameterExpression><![CDATA[$P{vehicles_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tabla">
+					<subreportParameterExpression><![CDATA["vehicle"]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["sub_example_vehicle_living_being.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

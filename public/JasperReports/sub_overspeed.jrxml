@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_overspeed" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" isIgnorePagination="true" uuid="6a6b3343-29f1-43d6-b8de-59ad7db45f0e">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dota"/>
+	<parameter name="id" class="java.lang.Integer"/>
+	<parameter name="name" class="java.lang.String"/>
+	<parameter name="INI_DATE" class="java.lang.String"/>
+	<parameter name="END_DATE" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{END_DATE}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MAX_SPEED" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[select * 
+from array_create_report_overspeed( $P{id}::integer, $P{INI_DATE}::timestamp, $P{END_DATE}::timestamp, $P{MAX_SPEED} );]]>
+	</queryString>
+	<field name="overspeed_start" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="overspeed_start"/>
+	</field>
+	<field name="overspeed_end" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="overspeed_end"/>
+	</field>
+	<field name="overspeed_duration" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="overspeed_duration"/>
+	</field>
+	<field name="top_speed" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="top_speed"/>
+	</field>
+	<field name="floor_speed" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="floor_speed"/>
+	</field>
+	<field name="overspeed_lat" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="overspeed_lat"/>
+	</field>
+	<field name="overspeed_lng" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="overspeed_lng"/>
+	</field>
+	<field name="ibutton" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ibutton"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="10">
+			<staticText>
+				<reportElement mode="Opaque" x="-20" y="-20" width="80" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="277838b7-41f9-4942-8408-00a826e1637e"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[GPS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="60" y="-20" width="110" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="ec7ff1ec-1c7f-4d3e-bb9b-becfbd542bd3"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="170" y="-20" width="110" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="c3c578c9-daf4-42e6-8e3f-1474d47b25f0"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="280" y="-20" width="61" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="ad70a939-3721-4ab4-a793-436a2f9ee787"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Duracion (min)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="341" y="-20" width="53" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="91f40b8e-c6f3-489e-a4a3-2d27d88b9516"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Velocidad Maxima]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="457" y="-20" width="73" height="30" isRemoveLineWhenBlank="true" forecolor="#FFFFFF" backcolor="#3970CA" uuid="90d2935c-5933-45d0-8724-c011d0f1a469"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ubicacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="394" y="-20" width="63" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="d10630c0-0907-4354-9bb5-6e4792dfad2e"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Velocidad Promedio]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15">
+			<textField pattern="0.00" isBlankWhenNull="false">
+				<reportElement mode="Opaque" x="341" y="0" width="53" height="15" isRemoveLineWhenBlank="true" uuid="057cec2e-ce64-4ae3-9ff4-237134737daf"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{top_speed}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="170" y="0" width="110" height="15" isRemoveLineWhenBlank="true" uuid="4cd42ab6-f242-467d-b382-5e6228135e05"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{overspeed_end}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement mode="Opaque" x="394" y="0" width="63" height="15" uuid="0b7a7a2a-d354-4a9a-aeca-b2775c13822f"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{floor_speed}.setScale(2, RoundingMode.FLOOR)+ ".kph"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="-20" y="0" width="80" height="15" isRemoveLineWhenBlank="true" uuid="89022052-cf3d-4bb1-862f-fac390154d35"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="##0 min" isBlankWhenNull="true">
+				<reportElement x="280" y="0" width="61" height="15" uuid="000d22b2-787f-4373-b226-11abaf28efd6"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{overspeed_duration}.setScale(3, BigDecimal.ROUND_HALF_UP)]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="Reference">
+				<reportElement x="457" y="0" width="73" height="15" isRemoveLineWhenBlank="true" forecolor="#3A5BC7" uuid="7dceda9e-f2a5-4592-ab9e-bd01eede8114"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Justified">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ver en mapa"]]></textFieldExpression>
+				<hyperlinkReferenceExpression><![CDATA["https://www.google.com/maps/search/?api=1&query="+ $F{overspeed_lat} +"," + $F{overspeed_lng} +"&t=m"]]></hyperlinkReferenceExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="60" y="0" width="110" height="15" isRemoveLineWhenBlank="true" uuid="9312f4a0-2cd6-4cb7-aeb7-788dac23805f"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{overspeed_start}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<noData>
+		<band height="60">
+			<staticText>
+				<reportElement mode="Opaque" x="-20" y="0" width="80" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="a15f490e-e744-4dfd-bbe5-8c037b122e01"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GPS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="60" y="0" width="110" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="74044e4e-6f29-48ad-a7ae-e6a2c30f16a6"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="170" y="0" width="110" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="0b47ec7b-9b55-48ef-b453-a511d9473c08"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="280" y="0" width="61" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="e556c28c-dac9-49d3-b152-7afd3c2f20d7"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Duracion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="341" y="0" width="53" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="cb90e9b3-ca3f-45ae-a8be-d0486600357a"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Velocidad Maxima]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="394" y="0" width="63" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="74a98a5e-9f41-47aa-b5c9-092e80ee005d"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Velocidad Promedio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="457" y="0" width="73" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="c7dea4f0-8cd0-4b66-91be-e67222a1db04"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ubicacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-20" y="30" width="549" height="30" uuid="ac2e5171-a499-4567-b586-32ab9863c13d"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nada se ha encontrado en su solicitud]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="minute_minute" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="c07b6648-039d-480b-bc41-5599f7ffb850">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="postgres Server"/>
+	<parameter name="IMEIS" class="java.lang.String"/>
+	<parameter name="INI_DATE" class="java.lang.String"/>
+	<parameter name="END_DATE" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select d.imei ,v.* ,vc.name type_vehicle
+from devices d 
+inner join device_vehicle dv on d.id = dv.device_id 
+inner join vehicles v on v.id = dv.vehicle_id
+inner join vehicle_classifications vc on vc.id = v.classification_vehicle_id
+where v.state = 'messages.state.enable' 
+and   dv.state = 'messages.state.enable'
+and   d.state = 'messages.state.enable'
+and   d.imei in ($P!{IMEIS})]]>
+	</queryString>
+	<field name="imei" class="java.lang.String"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="brand" class="java.lang.String"/>
+	<field name="model" class="java.lang.String"/>
+	<field name="color" class="java.lang.String"/>
+	<field name="state" class="java.lang.String"/>
+	<field name="license_plate" class="java.lang.String"/>
+	<field name="odometer" class="java.math.BigDecimal"/>
+	<field name="odometer_unit" class="java.lang.String"/>
+	<field name="engine_hours" class="java.math.BigDecimal"/>
+	<field name="engine_hours_unit" class="java.lang.String"/>
+	<field name="fuel_price" class="java.math.BigDecimal"/>
+	<field name="fuel_unit" class="java.lang.String"/>
+	<field name="stop_unit" class="java.lang.String"/>
+	<field name="min_movement_speed" class="java.math.BigDecimal"/>
+	<field name="min_engine_idle_speed" class="java.math.BigDecimal"/>
+	<field name="classification_vehicle_id" class="java.lang.Integer"/>
+	<field name="summer_rate" class="java.math.BigDecimal"/>
+	<field name="winter_rate" class="java.math.BigDecimal"/>
+	<field name="winter_from" class="java.sql.Date"/>
+	<field name="winter_to" class="java.sql.Date"/>
+	<field name="created_at" class="java.sql.Timestamp"/>
+	<field name="updated_at" class="java.sql.Timestamp"/>
+	<field name="group_id" class="java.lang.Integer"/>
+	<field name="year" class="java.lang.String"/>
+	<field name="type_vehicle" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="68" splitType="Stretch">
+			<image>
+				<reportElement x="363" y="0" width="184" height="39" uuid="efcdfaeb-b1fa-457e-97c3-64c365fe14d6"/>
+				<imageExpression><![CDATA["http://recupero.ubicar.com.bo/images/logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="38" width="62" height="30" uuid="b4841d5a-54d9-41e0-b4b7-0ffaf1e487ac"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periodo : ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="180" y="38" width="100" height="30" uuid="a42f8b99-bd5d-4488-982b-866d1a9af4c9"/>
+				<textFieldExpression><![CDATA[$P{END_DATE}.replace( "'", " " )]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="67" y="38" width="100" height="30" uuid="f9150f31-d031-4501-8425-628ad121c583"/>
+				<textFieldExpression><![CDATA[$P{INI_DATE}.replace( "'", " " )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="363" height="38" uuid="3787e686-e4de-4b28-bfc4-4f7c93913f9e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte Minuto a Minuto Detallado]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="203" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="203" uuid="262afa38-4e29-420a-abbe-ede406a2d456"/>
+				<subreportParameter name="IMEI_SUB">
+					<subreportParameterExpression><![CDATA[$F{imei}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="INI_DATE">
+					<subreportParameterExpression><![CDATA[$P{INI_DATE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="END_DATE">
+					<subreportParameterExpression><![CDATA[$P{END_DATE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="FUEL_COST">
+					<subreportParameterExpression><![CDATA[$F{fuel_price}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="NAME_VEHICLE">
+					<subreportParameterExpression><![CDATA[$F{name}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="TYPE_VEHICLE">
+					<subreportParameterExpression><![CDATA[$F{type_vehicle}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["C:/xampp/htdocs/2v-tracker/public/JasperReports/minuteMinuteReport/sub_min_min.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="170" y="0" width="100" height="30" uuid="48bb2300-38d5-4fca-a349-b2f063c5ac00"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" evaluationTime="Report">
+				<reportElement x="270" y="0" width="100" height="30" uuid="42354c44-a2db-4e18-9ee0-af1ccfb88347"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA["de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

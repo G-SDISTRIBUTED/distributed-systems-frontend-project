@@ -1,0 +1,403 @@
+/*!* begin map container*!*/
+#map {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 100% !important;
+    height: 100%;
+    z-index: 2;
+}
+
+.map-container {
+    position: relative;
+    width: 100% !important;
+    height: 100%;
+}
+
+
+
+
+.tippy-tooltip.stop-theme .tippy-backdrop {
+    background-color: #5E92DD;
+
+}
+
+
+
+.tippy-tooltip.route-theme .tippy-backdrop {
+    background-color:#676a6c;
+
+}
+
+.tippy-tooltip.drive-theme .tippy-backdrop {
+    background-color:#676a6c;
+}
+
+.dialog,#main-map,#map,.top-menu-bar{
+    position: relative;
+}
+
+#map {
+    z-index: 2;
+}
+
+#main-map{
+    z-index: 3;
+}
+
+.dialog {
+    z-index: 4;
+}
+
+
+.top-menu-bar{
+    z-index: 1;
+}
+
+iframe{
+    width: 100% !important;
+    height: 100% !important;
+
+}
+
+
+.row3 {
+    margin-bottom: 10px;
+    display: table;
+    width: 100%;
+}
+
+/* FIX if something goes wrong with css. This row doesn't have vertical alignment, suitable just to split lines and add spacing at the bottom */
+.row4 {
+    margin-bottom: 0px;
+    display: table;
+    width: 100%;
+    text-align: left;
+    line-height: 12px;
+    font-size: 0;
+}
+
+.row4 div {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 11px;
+}
+
+/* display: table-cell; */
+.margin-right-3 {
+    margin-right: 3px;
+}
+
+
+.map-layer-control {
+    background-color: #ffffff;
+    padding: 2px 5px 2px 5px;
+    height: 30px;
+    font-size: 12px;
+    color: #808080;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+}
+
+
+
+
+/*tool control*/
+.leaflet-top div.leaflet-control a, div.leaflet-control button {
+    color: #676a6c;
+    background-color: rgba(243, 243, 244, 0.8);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.leaflet-top div.leaflet-control a:hover, div.leaflet-control button:hover {
+    color: #676a6c;
+    background-color: rgba(243, 243, 244, 1);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #676a6c;
+    border-color: #676a6c;
+}
+
+button.btn-primary.dim {
+    box-shadow: inset 0 0 0 #676a6c, 0 5px 0 0 #676a6c, 0 10px 5px #999999;
+}
+
+.leaflet-top div.leaflet-control button:first-child {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.leaflet-top div.leaflet-control button:last-child {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.leaflet-bar a:first-child {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.leaflet-bar a:last-child {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom: none;
+}
+
+/* + cuscom icons*/
+.leaflet-control span i {
+    display: table;
+    width: 100%;
+    height: 100%;
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.leaflet-control span i.disabled {
+    opacity: 0.5;
+}
+
+.control-button.devices {
+    background-image: url('../images/markers/devices.svg');
+}
+
+.control-button.markers {
+    background-image: url('../images/markers/markers.svg');
+}
+
+.control-button.routes {
+    background-image: url('../images/markers/routes.svg');
+}
+
+.control-button.zones {
+    background-image: url('../images/markers/zones.svg');
+}
+
+.control-button.clusters {
+    background-image: url('../images/markers/clusters.svg');
+}
+
+.control-button.traffic {
+    background-image: url('../images/markers/traffic.svg');
+}
+
+.control-button.undo {
+    background-image: url('../img/undo.svg');
+}
+/*control panel*/
+.sidebar {
+    top: 0px;
+}
+
+.sidebar.collapsed {
+    width: 42px;
+}
+
+/*leaflet controls custom*/
+.leaflet-left {
+    left: 40px;
+}
+
+.leaflet-top {
+    top: -3px;
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        top: 7px;
+    }
+
+    .sidebar-left.collapsed ~ .sidebar-map .leaflet-left {
+        left: 50px;
+    }
+
+    .leaflet-left {
+        left: 50px;
+    }
+}
+
+/* - cuscom icons*/
+/*popoup*/
+table.leaflet-popup-custom tr th {
+    padding-right: 10px;
+    vertical-align: top;
+}
+
+/* sidebar styles for main panel*/
+
+.sidebar-left .sidebar-content {
+    left: 40px !important;
+}
+
+.sidebar-pane {
+    padding: 0px !important;
+}
+
+.sidebar-pane .sidebar-header {
+    margin: 0px !important;
+    padding-left: 10px !important;
+}
+
+.sidebar-pane .sidebar-body {
+}
+
+@media (min-width: 1200px) {
+    .sidebar-pane {
+        min-width: 416px !important;
+    }
+
+    .sidebar.collapsed {
+        width: 44px;
+    }
+
+    .sidebar-left ~ .sidebar-map .leaflet-left {
+        left: 465px;
+    }
+}
+
+/*datatables*/
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    padding-top: 2px !important;
+    padding-right: 8px !important;
+    padding-bottom: 2px !important;
+}
+
+.table > tbody > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td {
+    vertical-align: middle !important;
+}
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:after {
+    bottom: 3px !important;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before,
+table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
+    top: 7% !important;
+    background-color: #676a6c !important;
+}
+
+table#devices-table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before,
+table#devices-table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
+    top: 15% !important;
+    background-color: #676a6c !important;
+}
+
+table#devices-table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child,
+table#devices-table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child {
+    padding-left: 8px !important;
+}
+
+table#devices-table.dataTable > tbody > tr.child ul li {
+    border-bottom: 1px solid #efefef;
+    padding: 1px 0;
+}
+
+table#devices-table.dataTable > tbody > tr.child ul {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+table#devices-table.dataTable > tbody > tr.child {
+    background: #ffffff !important
+}
+
+table#devices-table.dataTable > tbody > tr.child ul li {
+    font-size: 12px;
+}
+
+table#devices-table.dataTable > tbody > tr.child span.dtr-title {
+    min-width: 35%;
+    font-weight: normal;
+}
+
+.table > tbody > tr > td .btn {
+    margin-bottom: 0px !important;
+}
+
+.table > tbody > tr > td .label {
+    font-size: 14px;
+    padding: 0px 8px;
+}
+
+table .context-menu-one.btn.btn-neutral {
+    padding: 0px !important;
+}
+
+.dataTables_wrapper {
+    padding-bottom: 0px !important;
+}
+
+.leaflet-fullscreen {
+    margin-top: 45px;
+}
+
+/*select2*/
+.select2-container {
+    z-index: 2000 !important;
+}
+
+/*navbar*/
+.top-navigation .navbar {
+    z-index: 1001 !important;
+}
+
+.leaflet-control-dialog.leaflet-control {
+    /*width: 880px !important;*/
+    height: 225px !important;
+    top: -235px !important;
+    left: 0px !important;
+}
+
+.tabs-container .nav-tabs > li {
+    float: left !important;
+    margin-bottom: -1px !important;
+}
+
+/*bottom_history dialog*/
+.leaflet-control-dialog .leaflet-control-dialog-inner .leaflet-control-dialog-close {
+    position: absolute;
+    top: 9px !important;
+    right: 9px !important;
+}
+
+ul#tabs_history li a {
+    padding: 5px 5px;
+}
+
+#plot {
+    background-color: #FFF;
+    height: 90%;
+    width: 100%;
+}
+
+#tab_container_history {
+    height: 70%;
+    width: 100%;
+    overflow-y: visible;
+}
+
+#table_history {
+    background-color: #FFF;
+    height: 90%;
+    width: 100%;
+}
+
+#bottom_history {
+    height: 99%;
+    width: 99.8%;
+    overflow-y: hidden;
+}

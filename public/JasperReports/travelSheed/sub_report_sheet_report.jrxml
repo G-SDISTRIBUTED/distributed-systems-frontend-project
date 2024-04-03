@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_report_sheet_report" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="387c6e01-a696-485a-9cf2-e6693bd18cef">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="INI_DATE" class="java.lang.String"/>
+	<parameter name="END_DATE" class="java.lang.String"/>
+	<parameter name="STOP_UNIT" class="java.lang.String"/>
+	<parameter name="STOP_TIME" class="java.lang.String"/>
+	<parameter name="MIN_MOV_SPEED" class="java.lang.String"/>
+	<parameter name="SUMMER_RATE" class="java.lang.String"/>
+	<parameter name="WINTER_RATE" class="java.lang.String"/>
+	<parameter name="WINTER_FROM" class="java.lang.String"/>
+	<parameter name="WINTER_TO" class="java.lang.String"/>
+	<parameter name="FUEL_COST" class="java.lang.String"/>
+	<parameter name="IMEI" class="java.lang.String"/>
+	<parameter name="TYPE_VEHICLE" class="java.lang.String"/>
+	<parameter name="NAME_VEHICLE" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT *
+FROM create_report_travel_sheet($P!{IMEI}::varchar(20) ,
+				 $P!{INI_DATE}::TIMESTAMP ,
+				 $P!{END_DATE}::TIMESTAMP ,
+				 '$P!{STOP_UNIT}'::varchar(20) ,
+				 $P!{STOP_TIME} ,
+				 $P!{MIN_MOV_SPEED} ,
+				 $P!{SUMMER_RATE},
+                   $P!{WINTER_RATE},
+				  '$P!{WINTER_FROM}'::date,
+				  '$P!{WINTER_TO}' ::date,  
+				  $P!{FUEL_COST} )]]>
+	</queryString>
+	<field name="ini_mov" class="java.lang.String"/>
+	<field name="end_mov" class="java.lang.String"/>
+	<field name="latitude_ini" class="java.lang.String"/>
+	<field name="longitude_ini" class="java.lang.String"/>
+	<field name="latitude_end" class="java.lang.String"/>
+	<field name="longitude_end" class="java.lang.String"/>
+	<field name="time_mov" class="java.lang.Double"/>
+	<field name="km_lon" class="java.lang.Double"/>
+	<field name="fuel_consumption" class="java.lang.Double"/>
+	<field name="fuel_cost" class="java.lang.Double"/>
+	<field name="group_name" class="java.lang.String"/>
+	<field name="mark" class="java.lang.String"/>
+	<field name="model" class="java.lang.String"/>
+	<field name="class_name" class="java.lang.String"/>
+	<field name="plate" class="java.lang.String"/>
+	<field name="color" class="java.lang.String"/>
+	<field name="year" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement x="-20" y="-20" width="62" height="18" uuid="e79729ce-1693-4e11-95de-f909e4f25c04"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[GPS : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="42" y="16" width="105" height="18" uuid="0812d9b8-d6e5-45f9-b780-ea2cc41ba785"/>
+				<textFieldExpression><![CDATA[$F{plate}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="42" y="34" width="105" height="18" uuid="383fcdb2-8e5d-42e5-9d5b-76c12fc50b08"/>
+				<textFieldExpression><![CDATA[$F{mark}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="320" y="-20" width="100" height="18" uuid="a6aca98c-c91a-4233-9a19-c98f7d104441"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{model}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-20" y="16" width="62" height="18" uuid="9a4428f4-bfb9-4812-8f3c-5a2a77a628f9"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Placa : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-20" y="34" width="62" height="18" uuid="be207019-d6e0-4612-9d46-17bd7114b037"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marca : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="-20" width="61" height="18" uuid="4ad585c4-79b8-45d3-99e5-8bca04c203df"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Modelo : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="42" y="-2" width="102" height="18" uuid="410ebe7c-21fe-42ad-a707-19c661a18869"/>
+				<textFieldExpression><![CDATA[$F{year}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-20" y="-2" width="62" height="18" uuid="64654ffc-dd60-48ac-90e8-3e9d341f5a85"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Año : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="42" y="-20" width="104" height="18" uuid="a9241251-11d0-43f5-a0fa-ecb870eb6c7d"/>
+				<textFieldExpression><![CDATA[$P{NAME_VEHICLE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="258" y="-2" width="61" height="18" uuid="5beb7f35-9d27-47c0-827e-305ab91871a1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Color : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="148" y="52" width="100" height="18" uuid="2a6d8181-e40e-4a75-bf32-24575983fdd6"/>
+				<textFieldExpression><![CDATA[$P{END_DATE}.replace( "'", " " )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="43" y="52" width="102" height="18" uuid="92331c47-fa91-4a52-846a-1ff46dba9c3e"/>
+				<textFieldExpression><![CDATA[$P{INI_DATE}.replace( "'", " " )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-20" y="52" width="62" height="18" uuid="daa3fdec-a0cd-4f3f-9b73-e17e3856d613"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periodo : ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="320" y="-2" width="20" height="11" uuid="cc7968fc-6d98-4db5-8362-e88390efd082">
+					<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{color}]]></propertyExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="258" y="16" width="61" height="18" uuid="64c5c548-d8a6-49cf-8498-f7b7c48d1def"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="320" y="16" width="100" height="18" uuid="4450966e-c34c-48fa-b94b-891e9e363162"/>
+				<textFieldExpression><![CDATA[$P{TYPE_VEHICLE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement mode="Opaque" x="-20" y="0" width="76" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="674f5fb7-fde0-49d7-ab99-b4da1fc2f43c"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha A]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="56" y="0" width="63" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="9bf8a7c0-c4e5-4520-ab4e-e570f14b24ec"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Posicion A]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="119" y="0" width="78" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="d2f953a6-208b-4bce-9494-2cf956d0c2d3"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha B]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="197" y="0" width="64" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="096a1ea6-ab5a-43b1-9a35-d60ae1f6dd74"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Posicion B]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="261" y="0" width="50" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="fbf67bf4-573b-4bd9-884e-54cebb56246d"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Duracion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="311" y="0" width="50" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="f8044e0d-1ab4-4717-9178-55111bc8e481"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Distancia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="361" y="0" width="61" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="d5e3d744-256a-4ecf-8143-a4c7fbeab184"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consumo Combustible]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="484" y="0" width="50" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="f3842ed8-4caa-49d7-afd4-24c386b216b5"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grupo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="422" y="0" width="62" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="0bc883cc-28ea-4174-9e62-baec8f42c486"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Costo Combustible]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="-20" y="0" width="75" height="30" uuid="2f2df62f-901a-4af5-87db-afec4f462bf8"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ini_mov}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="Reference">
+				<reportElement x="55" y="0" width="65" height="30" forecolor="#3A5BC7" uuid="2cc6eca9-490e-4950-9824-1034ba4b0571"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#3A5BC7"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#3A5BC7"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#3A5BC7"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#3A5BC7"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ver en mapa"]]></textFieldExpression>
+				<hyperlinkReferenceExpression><![CDATA["https://www.google.com/maps/search/?api=1&query="+ $F{latitude_ini} +"," + $F{longitude_ini}+"&t=m"]]></hyperlinkReferenceExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="120" y="0" width="77" height="30" uuid="a6781988-45ad-404e-a466-53703e1d27fb"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{end_mov}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="Reference">
+				<reportElement x="197" y="0" width="63" height="30" forecolor="#3A5BC7" uuid="133ea5fb-7f67-4455-a09f-5e5019439dea"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#3A5BC7"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#3A5BC7"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#3A5BC7"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#3A5BC7"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ver en mapa"]]></textFieldExpression>
+				<hyperlinkReferenceExpression><![CDATA["https://www.google.com/maps/search/?api=1&query="+$F{latitude_end} +"," +$F{longitude_end}+"&t=m"]]></hyperlinkReferenceExpression>
+			</textField>
+			<textField pattern="#,##0.# h" isBlankWhenNull="true">
+				<reportElement x="260" y="0" width="50" height="30" uuid="1a125c44-7e9e-446c-9bde-ad242be4a0d0"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{time_mov}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.# km" isBlankWhenNull="true">
+				<reportElement x="310" y="0" width="50" height="30" uuid="7cb097fa-b1c3-4f1d-9515-b6a3edcb17a2"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{km_lon}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.# ltr" isBlankWhenNull="true">
+				<reportElement x="360" y="0" width="61" height="30" uuid="1bb12f4c-5136-4bc5-b2da-57f2ba49ba63"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fuel_consumption}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="483" y="0" width="50" height="30" uuid="fc1e0e0d-144c-490f-9f3e-98a4e52cc813"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{group_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="421" y="0" width="62" height="30" uuid="59e662de-e0a3-4252-94b8-69bca3001b5e"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fuel_cost}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<noData>
+		<band height="150">
+			<staticText>
+				<reportElement mode="Opaque" x="359" y="90" width="63" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="bafb4358-7cda-47cc-9e3e-831d1abcdca3"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consumo Combustible]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="118" y="90" width="79" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="8cd3d0f6-b3be-4c78-a0d6-1c5572054128"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="197" y="90" width="63" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="c044a11e-f0c1-4dc6-8409-fec2d7215ab8"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ubicacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="54" y="90" width="64" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="e9c8e429-33fd-449f-a9d7-a1fd39e31d60"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ubicacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="422" y="90" width="57" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="a4705c8d-bd8f-4585-9686-d291b3c6f863"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Costo Combustible]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="310" y="90" width="49" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="47cf3f26-e632-4464-9b18-808e6e864ee1"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Distancia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="260" y="90" width="50" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="e738d16f-42c3-4767-acca-25c062cfbf90"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Duracion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="-20" y="90" width="74" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="182bc0a9-7fbc-49ef-b911-d68fa17342a2"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-20" y="120" width="551" height="30" uuid="da49cbed-eccf-439e-aebf-31784f8b97aa"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nada se ha encontrado en su solicitud]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="479" y="90" width="52" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="65a548c3-0992-4941-9019-115a40b5d4ae"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grupo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-20" y="0" width="62" height="18" uuid="37051ed5-0be9-475f-b8ec-f325433ae3ba"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[GPS : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="42" y="36" width="105" height="18" uuid="bd0c119e-7e16-4d53-9ff8-432ba70caae7"/>
+				<textFieldExpression><![CDATA[$F{plate}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="42" y="54" width="105" height="18" uuid="e28f57b5-e713-4dc1-8b70-f81e415af443"/>
+				<textFieldExpression><![CDATA[$F{mark}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="320" y="0" width="100" height="18" uuid="f79fec09-e1c7-4e00-a088-a6acabf0b79d"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{model}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-20" y="36" width="62" height="18" uuid="d476da2d-cc10-4122-8032-5cf8fa232435"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Placa : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-20" y="54" width="62" height="18" uuid="89e6e6a1-217d-43dc-b632-59efb16878a1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marca : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="0" width="61" height="18" uuid="3f2b732a-62ad-4999-8f97-231daaceb965"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Modelo : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="42" y="18" width="102" height="18" uuid="760de8c9-2d61-4d12-af8f-d736993cb984"/>
+				<textFieldExpression><![CDATA[$F{year}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-20" y="18" width="62" height="18" uuid="1b0a7a20-1ed7-4e1b-a80d-3660c8443f49"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Año : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="42" y="0" width="104" height="18" uuid="7eccc5c8-b909-49fe-a145-6c8e57c8ad47"/>
+				<textFieldExpression><![CDATA[$P{NAME_VEHICLE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="258" y="18" width="61" height="18" uuid="2b3a4a89-3276-4d19-a6ca-18389abc2d78"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Color : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="150" y="72" width="100" height="18" uuid="af047653-dc93-434b-baa5-3004a9ebec50"/>
+				<textFieldExpression><![CDATA[$P{END_DATE}.replace( "'", " " )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="43" y="72" width="102" height="18" uuid="d525f5f9-0bf8-41e8-a724-d84943048283"/>
+				<textFieldExpression><![CDATA[$P{INI_DATE}.replace( "'", " " )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-20" y="72" width="62" height="18" uuid="a705a74d-3615-464a-91a4-3255f46b0102"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periodo : ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="320" y="18" width="20" height="18" uuid="2a9e8699-b5e2-495b-8d25-dfe6c6270eca">
+					<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{color}]]></propertyExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="258" y="36" width="61" height="18" uuid="2d85960d-3c10-423f-b1ea-43d4e8d9b904"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="320" y="36" width="100" height="18" uuid="536915ee-c6cd-4b90-8408-dacdcedc1a9a"/>
+				<textFieldExpression><![CDATA[$P{TYPE_VEHICLE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</noData>
+</jasperReport>

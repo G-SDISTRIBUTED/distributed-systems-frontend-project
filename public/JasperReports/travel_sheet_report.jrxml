@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="travel_sheet_report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0a62b5ff-8814-49e2-8d65-8d671f46bf0f">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dota"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="VEHICLE_IDS" class="java.lang.String"/>
+	<parameter name="INI_DATE" class="java.lang.String"/>
+	<parameter name="END_DATE" class="java.lang.String"/>
+	<parameter name="STOP_TIME" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="subReport1" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT *
+from public.z_vehicles_ids_selected($P{VEHICLE_IDS} )]]>
+	</queryString>
+	<field name="vehicle_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="vehicle_id"/>
+	</field>
+	<field name="vehicle_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vehicle_name"/>
+	</field>
+	<field name="vehicle_plate" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vehicle_plate"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="47">
+			<image>
+				<reportElement x="360" y="0" width="195" height="47" uuid="d180a1cb-42a1-4059-8ad6-941c131bf4ec"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="60" y="0" width="100" height="30" uuid="7d6300b4-df8e-4643-b30c-4a216f5f5489"/>
+				<textFieldExpression><![CDATA[$P{INI_DATE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="60" height="30" uuid="490a66b3-a07d-4251-98ac-30409c13266e"/>
+				<text><![CDATA[Generado :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="160" y="0" width="100" height="30" uuid="e316605b-8467-43e9-b12a-fdc98ad6f204"/>
+				<textFieldExpression><![CDATA[$P{END_DATE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="69" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="69" uuid="b95a0ab0-fe25-427d-b5b5-a65ddaa0c7cb"/>
+				<subreportParameter name="VEHICLE_ID">
+					<subreportParameterExpression><![CDATA[$F{vehicle_id}.toString()]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="NAME">
+					<subreportParameterExpression><![CDATA[$F{vehicle_name}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="INI_DATE">
+					<subreportParameterExpression><![CDATA[$P{INI_DATE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="END_DATE">
+					<subreportParameterExpression><![CDATA[$P{END_DATE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STOP_TIME">
+					<subreportParameterExpression><![CDATA[$P{STOP_TIME}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{subReport1}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

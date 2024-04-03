@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="move_and_stops" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b663627f-4959-4685-81e1-d15fde4df50b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="IMEIS" class="java.lang.String"/>
+	<parameter name="INI_DATE" class="java.lang.String"/>
+	<parameter name="END_DATE" class="java.lang.String"/>
+	<parameter name="STOP_TIME" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select d.imei ,v.* ,vc.name type_vehicle
+from devices d 
+inner join device_vehicle dv on d.id = dv.device_id 
+inner join vehicles v on v.id = dv.vehicle_id
+inner join vehicle_classifications vc on vc.id = v.classification_vehicle_id
+where v.state = 'messages.state.enable' 
+and   dv.state = 'messages.state.enable'
+and   d.state = 'messages.state.enable'
+and   d.imei in ($P!{IMEIS})]]>
+	</queryString>
+	<field name="imei" class="java.lang.String"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="brand" class="java.lang.String"/>
+	<field name="model" class="java.lang.String"/>
+	<field name="color" class="java.lang.String"/>
+	<field name="state" class="java.lang.String"/>
+	<field name="license_plate" class="java.lang.String"/>
+	<field name="odometer" class="java.math.BigDecimal"/>
+	<field name="odometer_unit" class="java.lang.String"/>
+	<field name="engine_hours" class="java.math.BigDecimal"/>
+	<field name="engine_hours_unit" class="java.lang.String"/>
+	<field name="fuel_price" class="java.math.BigDecimal"/>
+	<field name="fuel_unit" class="java.lang.String"/>
+	<field name="stop_unit" class="java.lang.String"/>
+	<field name="min_movement_speed" class="java.math.BigDecimal"/>
+	<field name="min_engine_idle_speed" class="java.math.BigDecimal"/>
+	<field name="classification_vehicle_id" class="java.lang.Integer"/>
+	<field name="summer_rate" class="java.math.BigDecimal"/>
+	<field name="winter_rate" class="java.math.BigDecimal"/>
+	<field name="winter_from" class="java.sql.Date"/>
+	<field name="winter_to" class="java.sql.Date"/>
+	<field name="created_at" class="java.sql.Timestamp"/>
+	<field name="updated_at" class="java.sql.Timestamp"/>
+	<field name="group_id" class="java.lang.Integer"/>
+	<field name="year" class="java.lang.String"/>
+	<field name="type_vehicle" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="200" height="47" uuid="c6bc2024-0e15-475c-b1d2-6b49f863b0d0"/>
+				<imageExpression><![CDATA["http://recupero.ubicar.com.bo/images/logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="47" width="100" height="22" uuid="5a618619-62dc-4d60-80fe-13f179953bf3"/>
+				<text><![CDATA[Generado :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="188" y="48" width="108" height="22" uuid="9ac56d97-0bd9-4c13-aaa4-810e1da7b879"/>
+				<textFieldExpression><![CDATA[$P{END_DATE}.replace( "'", " " )]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="70" y="48" width="108" height="22" uuid="07b03b35-b314-402d-bcdc-227256bb6b66"/>
+				<textFieldExpression><![CDATA[$P{INI_DATE}.replace( "'", " " )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="200" y="-1" width="210" height="48" uuid="1b6bc5d0-1be5-42ae-8ecc-30867fed8301"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de Movimientos y Paradas]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="194" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="194" uuid="da80ec43-d4be-4c04-ad4c-5a0079919afb"/>
+				<subreportParameter name="IMEI">
+					<subreportParameterExpression><![CDATA[$F{imei}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="INI_DATE">
+					<subreportParameterExpression><![CDATA[$P{INI_DATE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="END_DATE">
+					<subreportParameterExpression><![CDATA[$P{END_DATE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STOP_UNIT">
+					<subreportParameterExpression><![CDATA[$F{stop_unit}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STOP_TIME">
+					<subreportParameterExpression><![CDATA[$P{STOP_TIME}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="MIN_MOV_SPEED">
+					<subreportParameterExpression><![CDATA[$F{min_movement_speed}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUMMER_RATE">
+					<subreportParameterExpression><![CDATA[$F{summer_rate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WINTER_RATE">
+					<subreportParameterExpression><![CDATA[$F{winter_rate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WINTER_FROM">
+					<subreportParameterExpression><![CDATA[$F{winter_from}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="WINTER_TO">
+					<subreportParameterExpression><![CDATA[$F{winter_to}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="FUEL_COST">
+					<subreportParameterExpression><![CDATA[$F{fuel_price}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="NAME_VEHICLE">
+					<subreportParameterExpression><![CDATA[$F{name}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="TYPE_VEHICLE">
+					<subreportParameterExpression><![CDATA[$F{type_vehicle}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["C:/xampp/htdocs/2v-tracker/public/JasperReports/moveStopReport/sub_move_stop.jrxml"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement x="279" y="0" width="100" height="30" uuid="3e3e7407-5a1a-4b8c-a0ed-b0fa7ae81dab"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement x="170" y="0" width="100" height="30" uuid="a8dfb865-e044-42d1-9a94-8a09504b0deb"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

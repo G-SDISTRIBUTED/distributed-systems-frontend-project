@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_mov_p" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9c7ffa03-7f2c-49f2-9f98-be866f0df672">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dota"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="VEHICLE_ID" class="java.lang.String"/>
+	<parameter name="NAME" class="java.lang.String"/>
+	<parameter name="PLATE" class="java.lang.String"/>
+	<parameter name="INI_DATE" class="java.lang.String"/>
+	<parameter name="END_DATE" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="subReport2" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT ($P{VEHICLE_ID}) AS VEHICLE_ID]]>
+	</queryString>
+	<field name="vehicle_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vehicle_id"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="28">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="230" y="12" width="150" height="16" uuid="e72d1650-2a43-4184-8dd1-334c8ac88e45"/>
+				<textFieldExpression><![CDATA[$P{END_DATE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement mode="Transparent" x="40" y="12" width="100" height="16" uuid="7e33fb8e-291f-4a0d-97a2-ffb73bbd6a77"/>
+				<textFieldExpression><![CDATA[$P{INI_DATE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="-20" y="-20" width="50" height="16" uuid="aa5f3cfb-8498-4353-83d8-57f016f2182a"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="-20" y="-4" width="60" height="16" forecolor="#000000" backcolor="#FFFFFF" uuid="263937e9-9ed5-48d4-9df5-c9bbadd68ac5"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Placa:]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="40" y="-4" width="119" height="16" uuid="9c4d181b-4d68-451f-9163-1d8bcacfbb19"/>
+				<textFieldExpression><![CDATA[$P{PLATE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement mode="Transparent" x="40" y="-20" width="100" height="16" uuid="a13b120b-07a1-402e-afb6-4478e281253f"/>
+				<textFieldExpression><![CDATA[$P{NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="180" y="12" width="30" height="16" uuid="4de10b16-e092-4e3b-a803-de393a1938a7"/>
+				<text><![CDATA[a]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="-20" y="12" width="70" height="16" uuid="92b07b67-ddcf-4110-b83f-1a7f0aa12a1a"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periodo : ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<subreport>
+				<reportElement x="-20" y="0" width="592" height="40" uuid="d56d2915-b66f-4031-997b-bb9033d55a9c"/>
+				<subreportParameter name="VEHICLE_ID">
+					<subreportParameterExpression><![CDATA[$F{vehicle_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="INI_DATE">
+					<subreportParameterExpression><![CDATA[$P{INI_DATE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="END_DATE">
+					<subreportParameterExpression><![CDATA[$P{END_DATE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{subReport2}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

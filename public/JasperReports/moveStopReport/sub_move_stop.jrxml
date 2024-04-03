@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_move_stop" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="cf337b2b-176e-4c32-a494-1f9b7e48277d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="postgres Server"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="IMEI" class="java.lang.String"/>
+	<parameter name="INI_DATE" class="java.lang.String"/>
+	<parameter name="END_DATE" class="java.lang.String"/>
+	<parameter name="STOP_UNIT" class="java.lang.String"/>
+	<parameter name="STOP_TIME" class="java.lang.String"/>
+	<parameter name="MIN_MOV_SPEED" class="java.lang.String"/>
+	<parameter name="SUMMER_RATE" class="java.lang.String"/>
+	<parameter name="WINTER_RATE" class="java.lang.String"/>
+	<parameter name="WINTER_FROM" class="java.lang.String"/>
+	<parameter name="WINTER_TO" class="java.lang.String"/>
+	<parameter name="FUEL_COST" class="java.lang.String"/>
+	<parameter name="NAME_VEHICLE" class="java.lang.String"/>
+	<parameter name="TYPE_VEHICLE" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT *
+FROM create_report_move_stop( $P!{IMEI}::varchar(20) ,
+				 $P!{INI_DATE}::TIMESTAMP ,
+				 $P!{END_DATE}::TIMESTAMP ,
+				 '$P!{STOP_UNIT}'::varchar(20) ,
+				 $P!{STOP_TIME} ,
+				 $P!{MIN_MOV_SPEED} ,
+				 $P!{SUMMER_RATE},
+                   $P!{WINTER_RATE},
+				  '$P!{WINTER_FROM}'::date,
+				  '$P!{WINTER_TO}' ::date,  
+				  $P!{FUEL_COST})]]>
+	</queryString>
+	<field name="id" class="java.lang.String"/>
+	<field name="state" class="java.lang.String"/>
+	<field name="ini_mov" class="java.lang.String"/>
+	<field name="end_mov" class="java.lang.String"/>
+	<field name="latitude" class="java.lang.String"/>
+	<field name="longitude" class="java.lang.String"/>
+	<field name="time_mov" class="java.lang.Double"/>
+	<field name="km_lon" class="java.lang.Double"/>
+	<field name="fuel_consumption" class="java.lang.Double"/>
+	<field name="fuel_cost" class="java.lang.Double"/>
+	<field name="top_speed" class="java.lang.Double"/>
+	<field name="idle_engine" class="java.lang.Double"/>
+	<field name="avg_speed" class="java.lang.Double"/>
+	<field name="engine_hours" class="java.lang.Double"/>
+	<field name="diff_time" class="java.lang.Double"/>
+	<field name="group_name" class="java.lang.String"/>
+	<field name="mark" class="java.lang.String"/>
+	<field name="model" class="java.lang.String"/>
+	<field name="class_name" class="java.lang.String"/>
+	<field name="plate" class="java.lang.String"/>
+	<field name="color" class="java.lang.String"/>
+	<field name="year" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="91" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="62" height="18" uuid="620dacb3-d864-4ad0-b80a-9edab3399866"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[GPS : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="62" y="36" width="105" height="18" uuid="bcb73f50-e469-4749-9b27-3c95d9d7e59d"/>
+				<textFieldExpression><![CDATA[$F{plate}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="62" y="54" width="105" height="18" uuid="e67f06d9-6fe1-41a8-bf75-aac107c62da8"/>
+				<textFieldExpression><![CDATA[$F{mark}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="338" y="0" width="100" height="18" uuid="bcd53c0f-0540-4fe8-ad79-4b7d5297f1d0"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{model}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="36" width="62" height="18" uuid="dea90a58-bf03-43ba-90c5-49b8e9bcea57"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Placa : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="54" width="62" height="18" uuid="4c777a7b-d197-4dec-8328-aa9def5e6559"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marca : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="0" width="61" height="18" uuid="ea0d3052-8c68-4694-808d-cffe5eeabdd9"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Modelo : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="62" y="18" width="102" height="18" uuid="7d814da4-5f1d-4aa4-ba05-a57afa01a5da"/>
+				<textFieldExpression><![CDATA[$F{year}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="18" width="62" height="18" uuid="695cb08a-4be6-4580-8487-8397baba986e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Año : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="62" y="0" width="104" height="18" uuid="1d7e12ff-6d44-4790-abb5-c1f4c34de832"/>
+				<textFieldExpression><![CDATA[$P{NAME_VEHICLE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="276" y="18" width="61" height="18" uuid="2641663c-2161-40f2-b7a6-9172a925b6fa"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Color : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="168" y="72" width="100" height="18" uuid="56bf87cb-f364-4f90-9520-4e232337b37b"/>
+				<textFieldExpression><![CDATA[$P{END_DATE}.replace( "'", " " )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="63" y="72" width="102" height="18" uuid="b53646bd-06b0-4878-aaf4-f30d4ef4b04e"/>
+				<textFieldExpression><![CDATA[$P{INI_DATE}.replace( "'", " " )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="72" width="62" height="18" uuid="e015705b-17e6-4421-9ef1-8c439a0ebd6b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periodo : ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="338" y="18" width="20" height="11" uuid="08b3e23e-f563-4848-a57c-11b01c7d4e2c">
+					<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{color}]]></propertyExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="276" y="36" width="61" height="18" uuid="3d6d3371-a9f2-4133-9950-45ec7b33e03e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="338" y="36" width="100" height="18" uuid="4bdc6772-98b3-45dc-a75a-b9cc81abe664"/>
+				<textFieldExpression><![CDATA[$P{TYPE_VEHICLE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="39" height="24" forecolor="#FFFFFF" backcolor="#3970CA" uuid="9a21d721-bc22-4b37-a0f7-99fb4a1e1c8f"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="39" y="0" width="61" height="24" forecolor="#FFFFFF" backcolor="#3970CA" uuid="afdc9fac-bcf7-46c1-95a0-b565ebba3659"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="100" y="0" width="60" height="24" forecolor="#FFFFFF" backcolor="#3970CA" uuid="2bcd5795-eeb2-42d4-8594-59a41bf8fb0c"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="217" y="0" width="64" height="24" forecolor="#FFFFFF" backcolor="#3970CA" uuid="a16892d2-fbe7-47ce-b6b9-9898bc2aac0e"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ubicacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="381" y="0" width="45" height="24" forecolor="#FFFFFF" backcolor="#3970CA" uuid="27d00988-9a89-48f8-b6eb-5f74a1ac8055"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Velocidad Maxima]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="426" y="0" width="49" height="24" forecolor="#FFFFFF" backcolor="#3970CA" uuid="3720a87a-682d-440d-915f-82f8bc3963ef"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Velocidad promedio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="475" y="0" width="43" height="24" forecolor="#FFFFFF" backcolor="#3970CA" uuid="6150de55-d304-4886-be26-b3cd1d14af23"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consumo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="518" y="0" width="43" height="24" forecolor="#FFFFFF" backcolor="#3970CA" uuid="dfffadef-f937-4744-83b6-ff1d2b2890a7"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Costo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="281" y="0" width="49" height="24" forecolor="#FFFFFF" backcolor="#3970CA" uuid="9d1bd818-3563-4dc5-adc9-f7b5f501cca2"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Horas Motor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="330" y="0" width="51" height="24" forecolor="#FFFFFF" backcolor="#3970CA" uuid="a9a468ef-cdc5-43ad-8934-555e3b4fd3fa"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Motor Inactivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="160" y="0" width="57" height="24" forecolor="#FFFFFF" backcolor="#3970CA" uuid="178c9932-2ca5-4fad-a5a2-5a516ce65287"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Duracion]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="100" y="0" width="60" height="29" uuid="575ac7a5-18b2-4fce-aa21-ced077186b11">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{end_mov}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" hyperlinkType="Reference">
+				<reportElement x="216" y="0" width="65" height="30" isRemoveLineWhenBlank="true" forecolor="#3A5BC7" uuid="7ed3deb8-1538-4df7-89d5-19b52972b62d">
+					<printWhenExpression><![CDATA[NOT(EQUALS($F{longitude},"0" ) )]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#3A5BC7"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#3A5BC7"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#3A5BC7"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#3A5BC7"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ver en mapa"]]></textFieldExpression>
+				<hyperlinkReferenceExpression><![CDATA["https://www.google.com/maps/search/?api=1&query="+ $F{latitude} +"," + $F{longitude}+"&t=m"]]></hyperlinkReferenceExpression>
+			</textField>
+			<textField pattern="###0.00# kph" isBlankWhenNull="true">
+				<reportElement x="381" y="0" width="45" height="29" uuid="90372165-ef6c-4119-a80e-8cea0ad2204c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{top_speed}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00# kph" isBlankWhenNull="true">
+				<reportElement x="426" y="0" width="48" height="29" uuid="8b542534-94a3-4898-b8f0-1089bb6cbaee">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{avg_speed}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00# ltr" isBlankWhenNull="true">
+				<reportElement x="474" y="0" width="44" height="29" uuid="892d236b-ef6d-4ce9-8bfd-09f86e95c23a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fuel_consumption}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00# bs" isBlankWhenNull="true">
+				<reportElement x="518" y="0" width="43" height="29" uuid="86f00952-aabc-4134-b57f-482f524885a7">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fuel_cost}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00# h" isBlankWhenNull="true">
+				<reportElement x="282" y="0" width="48" height="29" uuid="42f044e9-b7d3-4d3d-8eb0-45866133701c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{engine_hours}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00# h" isBlankWhenNull="true">
+				<reportElement x="330" y="0" width="51" height="29" uuid="00ce1418-9a2b-4d17-b1ce-12ca1c949c9e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{idle_engine}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 h" isBlankWhenNull="true">
+				<reportElement x="160" y="0" width="56" height="29" uuid="68eee775-d70e-4d17-89ad-17d99f5251a0">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{diff_time}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="-1" width="40" height="30" uuid="e24d256e-f0b9-4d0a-8e6b-7a1629852a7b">
+					<printWhenExpression><![CDATA[EQUALS($F{state},"1" )]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["En Movimiento"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="39" height="29" uuid="94f85273-ad8f-48e4-b39a-a7781d716517">
+					<printWhenExpression><![CDATA[EQUALS($F{state},"0")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Detenido"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="217" y="0" width="64" height="29" uuid="1299c7a0-905c-4e82-9cfe-7087c6f14d95">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[EQUALS($F{latitude},"0")]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 h" isBlankWhenNull="true">
+				<reportElement x="40" y="0" width="60" height="29" uuid="1017dc1c-1b4e-4fae-97d0-59078311223b">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ini_mov}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<noData>
+		<band height="145">
+			<textField>
+				<reportElement x="172" y="30" width="100" height="30" uuid="2ca9db6b-4922-47bf-9d11-6104565091f6"/>
+				<textFieldExpression><![CDATA[$P{END_DATE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="281" y="64" width="50" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="282be75e-8121-4e62-89af-20f0dda7c10c"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Horas Motor]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="62" y="0" width="100" height="30" uuid="928af03e-67a7-4f05-9d0d-935def72a110"/>
+				<textFieldExpression><![CDATA[$P{IMEI}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="39" y="64" width="61" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="9fb172f2-a679-474b-aeb8-d42258dc9340"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="381" y="64" width="46" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="3319a09d-906d-4174-8859-7cbb38bde1a7"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Velocidad Maxima]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="62" height="30" uuid="1b790c8f-60e2-49d0-a3de-2f9dcebaf2de"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[GPS : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="519" y="64" width="36" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="d4356f72-ce25-407f-b903-e795e9c1741c"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Costo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="426" y="64" width="50" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="80d73ae0-78c5-4b9f-befd-295842517a07"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Velocidad promedio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="330" y="64" width="51" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="bd0bcc19-ce09-47c8-9f32-4e5e10ef56cb"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Motor Inactivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="160" y="64" width="58" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="c7afe6c8-5e1d-4b27-892d-63109e05338b"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Duracion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="475" y="64" width="44" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="f3248019-4b90-4977-b46e-7c39b6a4e6b5"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consumo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="217" y="64" width="65" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="82171fb8-85e5-4c7c-933e-ba9b2b305904"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ubicacion]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="62" y="30" width="100" height="30" uuid="8432f067-0385-497a-aceb-21d15acd58fd"/>
+				<textFieldExpression><![CDATA[$P{INI_DATE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="100" y="64" width="60" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="405320ca-ee4c-4154-8841-7058272fd167"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="62" height="30" uuid="2a62314d-76e1-4fd1-b4af-ef5dc2c365b6"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periodo : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="64" width="40" height="30" forecolor="#FFFFFF" backcolor="#3970CA" uuid="41dee2cf-37a3-4828-85d4-3da3da46fe5e"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="94" width="554" height="30" uuid="2454e981-1f16-41ba-b565-d8330f2c79b2"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nada se ha encontrado en su solicitud]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>

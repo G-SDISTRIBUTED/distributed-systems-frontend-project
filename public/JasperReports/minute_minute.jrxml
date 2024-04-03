@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="minute_minute" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c07b6648-039d-480b-bc41-5599f7ffb850">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dota"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="318"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="671"/>
+	<property name="net.sf.jasperreports.export.xls.one.page.per.sheet" value="true"/>
+	<parameter name="VEHICLE_IDS" class="java.lang.String"/>
+	<parameter name="INI_DATE" class="java.lang.String"/>
+	<parameter name="END_DATE" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="subReport1" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT *
+from public.z_vehicles_ids_selected($P{VEHICLE_IDS})]]>
+	</queryString>
+	<field name="vehicle_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="vehicle_id"/>
+	</field>
+	<field name="vehicle_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vehicle_name"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="80" splitType="Stretch">
+			<image>
+				<reportElement positionType="FixRelativeToBottom" stretchType="ContainerHeight" x="0" y="0" width="280" height="50" uuid="efcdfaeb-b1fa-457e-97c3-64c365fe14d6"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="290" y="0" width="281" height="80" uuid="eb4454bc-949c-4dd0-8f38-d7ffd56516db"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["MINUTO A MINUTO DETALLADO"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="50" width="62" height="30" uuid="b4841d5a-54d9-41e0-b4b7-0ffaf1e487ac"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periodo : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="50" width="108" height="30" uuid="fefa2e45-dbe4-4657-9c0e-36b3bc4c4965"/>
+				<textFieldExpression><![CDATA[$P{END_DATE}.replace( "'", " " )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="62" y="50" width="108" height="30" uuid="03626f3d-a1f3-4f18-9b4f-63b80269af69"/>
+				<textFieldExpression><![CDATA[$P{INI_DATE}.replace( "'", " " )]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="94" splitType="Stretch">
+			<subreport>
+				<reportElement positionType="Float" x="0" y="20" width="751" height="74" uuid="262afa38-4e29-420a-abbe-ede406a2d456"/>
+				<subreportParameter name="VEHICLE_ID">
+					<subreportParameterExpression><![CDATA[$F{vehicle_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="INI_DATE">
+					<subreportParameterExpression><![CDATA[$P{INI_DATE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="END_DATE">
+					<subreportParameterExpression><![CDATA[$P{END_DATE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{subReport1}]]></subreportExpression>
+			</subreport>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="62" y="0" width="100" height="20" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="a52d8736-e0fb-4767-a9d7-6b395dac67eb"/>
+				<textElement>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vehicle_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="62" height="20" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="129b382c-aa2d-4393-8a28-d1728728abd5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[GPS : ]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="310" y="0" width="100" height="30" uuid="48bb2300-38d5-4fca-a349-b2f063c5ac00"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="419" y="0" width="100" height="30" uuid="42354c44-a2db-4e18-9ee0-af1ccfb88347"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

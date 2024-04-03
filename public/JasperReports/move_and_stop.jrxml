@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="move_and_stops" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b663627f-4959-4685-81e1-d15fde4df50b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dota"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<parameter name="VEHICLE_IDS" class="java.lang.String"/>
+	<parameter name="INI_DATE" class="java.lang.String"/>
+	<parameter name="END_DATE" class="java.lang.String"/>
+	<parameter name="STOP_TIME" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="logo" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="subReport1" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[select *
+from z_vehicles_ids_selected($P{VEHICLE_IDS})]]>
+	</queryString>
+	<field name="vehicle_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="vehicle_id"/>
+	</field>
+	<field name="vehicle_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vehicle_name"/>
+	</field>
+	<field name="vehicle_plate" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vehicle_plate"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="77" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="200" height="47" uuid="c6bc2024-0e15-475c-b1d2-6b49f863b0d0"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="47" width="100" height="30" uuid="5a618619-62dc-4d60-80fe-13f179953bf3"/>
+				<text><![CDATA[Generado :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="208" y="47" width="108" height="30" uuid="9ac56d97-0bd9-4c13-aaa4-810e1da7b879"/>
+				<textFieldExpression><![CDATA[$P{END_DATE}.replace( "'", " " )]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="100" y="47" width="108" height="30" uuid="07b03b35-b314-402d-bcdc-227256bb6b66"/>
+				<textFieldExpression><![CDATA[$P{INI_DATE}.replace( "'", " " )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="320" y="0" width="264" height="77" uuid="53e6ea3a-9861-45fc-b16d-e9cd1fe4002a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de Movimientos y Paradas]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="194" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="194" uuid="da80ec43-d4be-4c04-ad4c-5a0079919afb"/>
+				<subreportParameter name="VEHICLE_ID">
+					<subreportParameterExpression><![CDATA[$F{vehicle_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="NAME">
+					<subreportParameterExpression><![CDATA[$F{vehicle_name}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="INI_DATE">
+					<subreportParameterExpression><![CDATA[$P{INI_DATE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="END_DATE">
+					<subreportParameterExpression><![CDATA[$P{END_DATE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STOP_TIME">
+					<subreportParameterExpression><![CDATA[$P{STOP_TIME}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{subReport1}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

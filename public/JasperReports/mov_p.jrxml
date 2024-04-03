@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="mov_p" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c98aaaf2-f0d9-4c43-82ee-a968ce3354db">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dota"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="VEHICLE_IDS" class="java.lang.String"/>
+	<parameter name="INI_DATE" class="java.lang.String"/>
+	<parameter name="END_DATE" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="subReport1" class="java.lang.String"/>
+	<parameter name="subReport2" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select *
+from z_vehicles_ids_selected($P{VEHICLE_IDS})]]>
+	</queryString>
+	<field name="vehicle_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="vehicle_id"/>
+	</field>
+	<field name="vehicle_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vehicle_name"/>
+	</field>
+	<field name="vehicle_plate" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vehicle_plate"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<textField>
+				<reportElement x="250" y="0" width="160" height="50" uuid="7db04fee-ad39-4f1a-834f-dafbadbf9d37"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["MOVIMIENTO PARQUEO"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="0" width="250" height="50" uuid="cabe32ec-0257-4c03-9b58-27011d1aa6a4"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="39" splitType="Stretch">
+			<subreport isUsingCache="false" overflowType="Stretch">
+				<reportElement x="0" y="0" width="572" height="39" uuid="b9e38e8e-e440-4c45-90fb-42326944ec21"/>
+				<subreportParameter name="VEHICLE_ID">
+					<subreportParameterExpression><![CDATA[$F{vehicle_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="NAME">
+					<subreportParameterExpression><![CDATA[$F{vehicle_name}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="PLATE">
+					<subreportParameterExpression><![CDATA[$F{vehicle_plate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="INI_DATE">
+					<subreportParameterExpression><![CDATA[$P{INI_DATE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="END_DATE">
+					<subreportParameterExpression><![CDATA[$P{END_DATE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subReport2">
+					<subreportParameterExpression><![CDATA[$P{subReport2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{subReport1}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>
