@@ -14,5 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [MainController::class, 'index']);
+Route::get('/', [MainController::class, 'index'])->name('cliente.index');
 Route::get('cliente/create', [MainController::class, 'create'])->name('cliente.create');
+Route::post('cliente/create', [MainController::class, 'store'])->name('cliente.store');
+Route::get('cliente/edit/{id}', [MainController::class, 'edit'])->name('cliente.edit');
+Route::post('cliente/edit/{id}', [MainController::class, 'update'])->name('cliente.update');
+Route::get('cliente/delete/{id}', [MainController::class, 'destroy'])->name('cliente.delete');

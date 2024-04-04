@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="{!! asset('css/admin.css') !!}"/>
     <link href="{{ asset('css/datatables/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{!! asset('vendor/datatables/buttons.dataTables.min.css') !!}">
-    <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
     <div class="container" style="margin: 0;
@@ -25,41 +24,29 @@
         
         <div class="row mt-4" style="text-align: center;">
             <div class="col-lg-12">
-                <h1>Añadir Cliente</h1>
+                <h1>Editar Cliente</h1>
             </div>
         </div>
         <div style="height: 25px;"></div>
         <div class="row mt-4">
             <div class="col-lg-6">
-                <form action="{{ route('cliente.store') }}" method="POST" style="width: 350px;">
+                <form action="{{ route('cliente.update',$cliente['ci']) }}" method="POST" style="width: 350px;">
                     @csrf
                     <div class="form-group" style="margin-bottom: 15px;">
                         <label for="ci">CI:</label>
-                        <input type="text" name="ci" class="form-control" placeholder="CI">
-                        @error('ci')
-                            <p style="color:red;">{{ $message }}</p>
-                        @enderror
+                        <input type="text" name="ci" class="form-control" placeholder="CI" value="{{$cliente['ci']}}">
                     </div>
                     <div class="form-group">
                         <label for="nombre">Nombre:</label>
-                        <input type="text" name="nombre" class="form-control" placeholder="Nombre">
-                        @error('nombre')
-                            <p style="color:red;">{{ $message }}</p>
-                        @enderror
+                        <input type="text" name="nombre" class="form-control" placeholder="Nombre" value="{{$cliente['nombre']}}">
                     </div>
                     <div class="form-group">
                         <label for="direccion">Dirección:</label>
-                        <input type="text" name="direccion" class="form-control" placeholder="Dirección">
-                        @error('direccion')
-                            <p style="color:red;">{{ $message }}</p>
-                        @enderror
+                        <input type="text" name="direccion" class="form-control" placeholder="Dirección" value="{{$cliente['direccion']}}">
                     </div>
                     <div class="form-group">
                         <label for="telefono">Teléfono:</label>
-                        <input type="text" name="telefono" class="form-control" placeholder="Teléfono">
-                        @error('telefono')
-                            <p style="color:red;">{{ $message }}</p>
-                        @enderror
+                        <input type="text" name="telefono" class="form-control" placeholder="Teléfono" value="{{$cliente['telefono']}}">
                     </div>
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>

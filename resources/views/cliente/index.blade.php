@@ -19,7 +19,7 @@
     <div style="height: 20px;"></div>
         <div class="row mt-4">
             <div class="col-lg-12">
-                <a href="{{ url('cliente/create') }}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Añadir Cliente</a>
+                <a href="{{ route('cliente.create') }}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Añadir Cliente</a>
             </div>
         </div>
         <div style="height: 25px;"></div>
