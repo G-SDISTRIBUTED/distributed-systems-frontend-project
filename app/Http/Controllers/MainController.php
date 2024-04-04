@@ -11,4 +11,9 @@ class MainController extends Controller
     {
         return $dataTable->render('cliente.index');
     }
+
+    public function create()
+    {
+        return view('cliente.create');
+    }
 }
