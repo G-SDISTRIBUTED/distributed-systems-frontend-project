@@ -1,114 +1,59 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Cliente</title>
-    <!-- Estilos CSS -->
-    <style>
-        /* Estilos personalizados */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-top: 30px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            font-weight: bold;
-        }
-        input[type="text"],
-        input[type="password"],
-        select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            margin-right: -15px;
-            margin-left: -15px;
-        }
-        .col-lg-6 {
-            flex: 0 0 50%;
-            max-width: 50%;
-            padding-right: 15px;
-            padding-left: 15px;
-        }
-        .btn {
-            display: inline-block;
-            font-weight: 400;
-            color: #212529;
-            text-align: center;
-            vertical-align: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            background-color: #f8f9fa;
-            border: 1px solid transparent;
-            padding: .375rem .75rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            border-radius: .25rem;
-            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-            cursor: pointer;
-        }
-        .btn-primary {
-            color: #fff;
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-        .btn-default {
-            color: #212529;
-            background-color: #f8f9fa;
-            border-color: #f8f9fa;
-        }
-    </style>
+    <title>Transporte</title>
+
+    <link href="{{ asset('css/datatables/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/datatables/responsive.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{!! asset('css/vendor.css') !!}"/>
+    <link rel="stylesheet" href="{!! asset('css/admin.css') !!}"/>
+    <link href="{{ asset('css/datatables/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{!! asset('vendor/datatables/buttons.dataTables.min.css') !!}">
 </head>
 <body>
-
-    <h1>Crear Cliente</h1>
-
-    <form action="" method="POST" id="client-form">
-        @csrf
-
-        <section>
-
-            <div class="ibox-content">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="CI">{{ __('CI') }}:</label>
-                            <input type="text" name="CI" class="form-control" placeholder="{{ __('CI') }}" autofocus>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="Nombre">{{ __('Nombre') }}:</label>
-                            <input type="text" name="Nombre" class="form-control" placeholder="{{ __('Nombre') }}">
-                        </div>
-                    </div>
-                    <!-- Agrega aquí los otros campos del cliente -->
-                </div>
+    <div class="container">
+        <div style="height: 20px;"></div>
+        <div class="row mt-4">
+            <div class="col-lg-12">
+                <h1>Añadir Cliente</h1>
             </div>
-        </section>
-
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>
-            <a href="" class="btn btn-default">{{ __('Cancelar') }}</a>
         </div>
-    </form>
+        <div style="height: 25px;"></div>
+        <div class="row mt-4">
+            <div class="col-lg-6">
+                <form action="{{ url('cliente') }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="CI">CI:</label>
+                        <input type="text" name="CI" class="form-control" placeholder="CI">
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" name="nombre" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="direccion">Dirección:</label>
+                        <input type="text" name="direccion" class="form-control" placeholder="Dirección">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono:</label>
+                        <input type="text" name="telefono" class="form-control" placeholder="Teléfono">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
+    <script src="{{ asset('vendor/datatables/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+    <script src="{{ asset('js/JqueryApp.js') }}" type="text/javascript"></script>
+    <script src="{!! asset('js/datatables/jquery.dataTables.1.10.13.min.js') !!}" type="text/javascript"></script>
+    <script src="{!! asset('js/datatables/dataTables.responsive.min.js') !!}" type="text/javascript"></script>
+    <script src="{{ asset('js/datatables/datatables.bootstrap.js') }}"></script>
+    <script src="{{ asset('js/scripts.js') }}"></script>
 </body>
 </html>
