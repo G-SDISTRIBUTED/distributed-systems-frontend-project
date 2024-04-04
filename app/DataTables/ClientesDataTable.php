@@ -30,12 +30,12 @@ class ClientesDataTable extends DataTable
         $jsonResponse = $response->json();
         $clientes = isset($jsonResponse['data']) ? $jsonResponse['data'] : [];
 
-     Log::info("Clientes: ".json_encode($clientes));
         $dataTable = new CollectionDataTable(collect($clientes));
 
-        $dataTable->addColumn('actions', function ($user) {
-                    return $this->getActions(1, 'device/', 'device.', 'enable', 'devices')
-                    . ' ' . $this->getActionDelete(1, 'device.','enable');
+        $dataTable->addColumn('actions', function ($cliente) {
+            Log::info("Cliente mandado: ".json_encode($cliente));
+                    return $this->getActions($cliente['ci'], 'cliente/', '', 'enable', '')
+                    . ' ' . $this->getActionDelete($cliente['ci'], 'cliente.','enable');
             });
             $dataTable->rawColumns(['actions']);
 
@@ -105,65 +105,13 @@ class ClientesDataTable extends DataTable
 
     protected function getActions($id, $url,$route,$state,$model)
     {
-
-
-        $show=$model.'.read';
-        $update=$model.'.update';
-        $disable=$model.'.disable';
-
-
-
-        $icon="fa fa-thumbs-down";
-        $msg=__('messages.state.confirmation');
-
-
-        if($state!="messages.state.enable"){
-            $icon="fa fa-thumbs-up";
-            $msg=__('messages.state.confirmation.up');
-        }
-
-        $actionShow='<a href="' . $url . $id . '" class="btn btn-xs btn-info" data-toggle="tooltip" 
+        $actionShow='<a href="' . $url . 'show/'. $id . '" class="btn btn-xs btn-info" data-toggle="tooltip" 
                 title="' . __('messages.general.show') . '"><i class="fa fa-eye"></i></a> ';
 
-        $actionEdit='<a href="' . $url . $id . '/edit" class="btn btn-xs btn-warning" data-toggle="tooltip" 
+        $actionEdit='<a href="' . $url . 'edit/'.$id. '" class="btn btn-xs btn-warning" data-toggle="tooltip" 
                  title="' . __('messages.general.edit') . '"><i class="fa fa-pencil-square-o"></i></a>';
 
-        $actionState='<a onclick="validateChangeState(\'change-state-form-' . $id . '\',\'' . $msg . '\')" 
-                    class="btn btn-xs btn-success" data-toggle="tooltip" title="' . __('messages.general.change.state') . '">
-                    <i class="'.$icon.'"></i>
-                </a>
-              
-                <form id="change-state-form-' . $id . '" action="' . "". '" method="POST" style="display: none">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <input type="hidden" name="_token" value="' . csrf_token() . '" />
-                </form>';
-
-
-
-        if($state=="messages.state.block"){
-
-            $icon="fa fa-thumbs-down";
-            $msg=__('messages.state.confirmation');
-
-            $actionShow='<a href="' . $url . $id . '" class="btn btn-xs btn-info" data-toggle="tooltip" 
-                title="' . __('messages.general.show') . '"><i class="fa fa-eye"></i></a> ';
-
-            $actionEdit='<a href="' . $url . $id . '/edit" class="btn btn-xs btn-warning" data-toggle="tooltip" 
-                 title="' . __('messages.general.edit') . '"><i class="fa fa-pencil-square-o"></i></a>';
-
-            $actionState='<a onclick="validateChangeState(\'change-state-form-' . $id . '\',\'' . $msg . '\')" 
-                    class="btn btn-xs btn-success" data-toggle="tooltip" title="' . __('messages.general.change.state') . '">
-                    <i class="'.$icon.'"></i>
-                </a>
-              
-                <form id="change-state-form-' . $id . '" action="' . '' . '" method="POST" style="display: none">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <input type="hidden" name="_token" value="' . csrf_token() . '" />
-                </form>';
-        }
-
-
-        return $actionShow." ".$actionEdit." ".$actionState;
+        return $actionShow." ".$actionEdit;
     }
 
     public function getActionDelete($id, $route,$state)
@@ -173,15 +121,10 @@ class ClientesDataTable extends DataTable
                     <i class="fa fa-trash"></i>
                 </a>
                 
-                
-                <form id="delete-form-' . $id . '" action="' . '' . '" method="POST" style="display: none">
+                <form id="delete-form-' . $id . '" action="' . route($route . 'delete', $id) . '" method="POST" style="display: none">
                     <input type="hidden" name="_method" value="POST">
                     <input type="hidden" name="_token" value="' . csrf_token() . '" />
                 </form>';
-
-
-        
-
         return $actionDelete;
     }
 }

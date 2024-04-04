@@ -36,10 +36,17 @@ class MainController extends Controller
         }
     }
 
+    public function show($ci){
+        $response = Http::get('http://127.0.0.1:8000/api/clientes/'.$ci);
+        $jsonResponse = $response->json();
+        $cliente = isset($jsonResponse['data']) ? $jsonResponse['data'] : null;
+        return view('cliente.show',compact('cliente'));
+    }
+
     public function edit($ci){
         $response = Http::get('http://127.0.0.1:8000/api/clientes/'.$ci);
         $jsonResponse = $response->json();
-        $cliente = isset($jsonResponse['data']) ? $jsonResponse['data'] : [];
+        $cliente = isset($jsonResponse['data']) ? $jsonResponse['data'] : null;
         return view('cliente.edit',compact('cliente'));
     }
 

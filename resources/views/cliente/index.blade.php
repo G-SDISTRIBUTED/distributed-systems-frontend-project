@@ -43,5 +43,23 @@
 <script src="{!! asset('js/datatables/dataTables.responsive.min.js') !!}" type="text/javascript"></script>
 <script src="{{ asset('js/datatables/datatables.bootstrap.js') }}"></script>
 <script src="{{ asset('js/scripts.js') }}"></script>
+<link href="{{ asset('css/inspinia/plugins/sweetalert/sweetalert.css') }}" rel="stylesheet">
+<script src="{{ asset('js/inspinia/plugins/sweetalert/sweetalert-dev.js') }}"></script>
+<script>
+    function validateDeleteAction(form) {
+        event.preventDefault();
+        swal({
+            title: "Eliminacion",
+            text: 'Esta seguro?',
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: 'Eliminar',
+            closeOnConfirm: false
+        }, function () {
+            document.getElementById(form).submit();
+        });
+    }
+</script>
 </body>
 </html>
