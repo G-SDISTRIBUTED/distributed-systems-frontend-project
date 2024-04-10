@@ -26,7 +26,10 @@ class ClientesDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): CollectionDataTable
     {
-        $response = Http::get('http://127.0.0.1:8000/api/clientes');
+        $response = Http::get('http://127.0.0.1:8000/api/clientes', [
+            'perPages' => 4,
+            'pages' => 1,
+        ]);
         $jsonResponse = $response->json();
         $clientes = isset($jsonResponse['data']) ? $jsonResponse['data'] : [];
 
@@ -66,6 +69,7 @@ class ClientesDataTable extends DataTable
                     ->minifiedAjax()
                     //->dom('Bfrtip')
                     ->orderBy(1)
+                    ->lengthMenu([5,10, 15, 20])
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
