@@ -3,44 +3,83 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ClientesDataTable;
+use App\DataTables\ItemsDataTable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Jobs\CrearCliente;
+use Exception;
+use Illuminate\Support\Facades\Log;
+use PgSql\Lob;
 
 class MainController extends Controller
 {
     public function index(ClientesDataTable $dataTable)
     {
+        return $dataTable->render('welcome');
+    }
+
+    public function indexClientes(ClientesDataTable $dataTable)
+    {
         return $dataTable->render('cliente.index');
     }
 
-    public function create()
+    public function indexItems(ItemsDataTable $dataTable)
+    {
+        return $dataTable->render('item.index');
+    }
+
+    public function createCliente()
     {
         return view('cliente.create');
     }
 
-    public function store(Request $request)
+    public function createItem()
     {
-        /* $this->validate(request(),['ci'=>'required',
-                                    'nombre'=>'required',
-                                    'direccion'=>'required',
-                                    'telefono'=>'required'
-                                ]); */
+        return view('item.create');
+    }
 
-        //$response = Http::timeout(60)->post('http://127.0.0.1:8000/api/clientes', request(['ci', 'nombre', 'direccion', 'telefono']));
-        $response = Http::post('http://127.0.0.1:8000/api/servicios', [
-            'clase' => 'cliente',
-            'funcion' => 'store',
-            'data'=>request(['ci', 'nombre', 'direccion', 'telefono'])]
-        ); 
-        return $response;
-        /* $jsonResponse = $response->json();
+    public function storeCliente(Request $request)
+    {
+        try{
+            $response = Http::post('http://127.0.0.1:8000/api/servicios', [
+                'clase' => 'cliente',
+                'funcion' => 'store',
+                'data'=>request(['ci', 'nombre', 'direccion', 'telefono'])]
+            );
+            $jsonResponse = $response->json();
+    
+            if ($response->successful()) {
+                return redirect()->route('clientes');
+            } else {
+                return redirect()->back()->withErrors($jsonResponse['message']);
+            } 
+        }catch(Exception $e){
+            return redirect()->back()->withErrors($e->getMessage());
+        }
+    }
 
-        if ($jsonResponse['code'] == 700) {
-            return redirect()->route('cliente.index');
-        } else {
-            return redirect()->back()->withErrors($jsonResponse['message']);
-        }  */
+    public function storeItem(Request $request)
+    {
+        Log::info("llega");
+        try{
+            $response = Http::post('http://127.0.0.1:8000/api/servicios', [
+                'clase' => 'item',
+                'funcion' => 'store',
+                'data'=>request(['id', 'nombre', 'descripcion'])]
+            );
+            Log::info("llega2");
+            $jsonResponse = $response->json();
+            Log::info("llega3: ".json_encode($jsonResponse));
+            if ($response->successful()) {
+                return redirect()->route('items');
+            } else {
+                return redirect()->back()->withErrors($jsonResponse['message']);
+            }
+            
+            Log::info("llega4");
+        }catch(Exception $e){
+            return redirect()->back()->withErrors($e->getMessage());
+        }
     }
 
     public function show($ci)
