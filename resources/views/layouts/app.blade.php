@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clientes</title>
-
+    <title>@yield('title')</title>
     <link href="{{ asset('css/datatables/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/datatables/responsive.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -15,23 +14,19 @@
     <link rel="stylesheet" href="{!! asset('vendor/datatables/buttons.dataTables.min.css') !!}">
 </head>
 <body>
-    <div class="container">
-    <div style="height: 20px;"></div>
-        <div class="row mt-4">
-            <div class="col-lg-12">
-                <a href="{{ route('cliente.create') }}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Añadir Cliente</a>
+    <div class="wrapper">
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Menú</h3>
             </div>
-        </div>
-        <div style="height: 25px;"></div>
-        <div class="row mt-4">
-            <div class="col-lg-12">
+            <ul class="list-unstyled components">
+                <li><a href="{{ route('clientes') }}">Clientes</a></li>
+                <li><a href="{{ route('items') }}">Items</a></li>
+            </ul>
+        </nav>
 
-                <div class="ibox float-e-margins">
-                    <div class="ibox-content">
-                        {!! $dataTable->table(['class' => 'table table-striped table-hover', 'id' => 'cliente-manager']) !!}
-                    </div>
-                </div>
-            </div>
+        <div id="content">
+            @yield('content')
         </div>
     </div>
 
@@ -89,5 +84,6 @@
         modal.style.display = "none";
         });
 </script>
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

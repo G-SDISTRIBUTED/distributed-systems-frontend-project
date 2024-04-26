@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transporte</title>
+    <title>Cliente</title>
 
     <link href="{{ asset('css/datatables/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/datatables/responsive.dataTables.min.css') }}" rel="stylesheet">
@@ -34,7 +34,7 @@
                     @csrf
                     <div class="form-group" style="margin-bottom: 15px;">
                         <label for="ci">CI:</label>
-                        <input type="text" name="ci" class="form-control" placeholder="CI" value="{{$cliente['ci']}}">
+                        <input type="text" name="ci" class="form-control" placeholder="CI" value="{{$cliente['ci']}}" readonly>
                     </div>
                     <div class="form-group">
                         <label for="nombre">Nombre:</label>
@@ -64,7 +64,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);">
-  <div class="modal-contenido" style="background-color: white;
+  <div class="modal-contenido alert alert-danger" style="
     margin: 20% auto;
     padding: 20px;
     border: 1px solid #888;
@@ -73,10 +73,7 @@
     float: right;
     font-size: 28px;
     font-weight: bold;">&times;</span>
-
-  <div class="alert alert-danger">
         <h1>{{ $errors->first() }}</h1>
-  </div>
   </div>
 </div>
 @endif

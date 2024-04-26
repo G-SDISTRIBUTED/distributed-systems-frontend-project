@@ -64,7 +64,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);">
-  <div class="modal-contenido" style="background-color: white;
+  <div class="modal-contenido alert alert-danger" style="
     margin: 20% auto;
     padding: 20px;
     border: 1px solid #888;
@@ -73,10 +73,7 @@
     float: right;
     font-size: 28px;
     font-weight: bold;">&times;</span>
-
-  <div class="alert alert-danger">
         <h1>{{ $errors->first() }}</h1>
-  </div>
   </div>
 </div>
 @endif
