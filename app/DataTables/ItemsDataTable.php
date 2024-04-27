@@ -92,6 +92,7 @@ class ItemsDataTable extends DataTable
             Column::make('id'),
             Column::make('nombre'),
             Column::make('descripcion'),
+            Column::computed('actions'),
         ];
     }
 
