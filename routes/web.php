@@ -19,10 +19,10 @@ Route::get('/', function () { return view('welcome');})->name('home');
 Route::get('cliente/index', [ClienteController::class, 'index'])->name('clientes');
 Route::get('cliente/create', [ClienteController::class, 'create'])->name('cliente.create');
 Route::post('cliente/create', [ClienteController::class, 'store'])->name('cliente.store');
-Route::get('cliente/show/{id}', [ClienteController::class, 'show'])->name('cliente.show');
-Route::get('cliente/edit/{id}', [ClienteController::class, 'edit'])->name('cliente.edit');
-Route::post('cliente/update/{id}', [ClienteController::class, 'update'])->name('cliente.update');
-Route::post('cliente/delete/{id}', [ClienteController::class, 'destroy'])->name('cliente.delete');
+Route::get('cliente/show/{ci}', [ClienteController::class, 'show'])->name('cliente.show');
+Route::get('cliente/edit/{ci}', [ClienteController::class, 'edit'])->name('cliente.edit');
+Route::post('cliente/update/{ci}', [ClienteController::class, 'update'])->name('cliente.update');
+Route::post('cliente/delete/{ci}', [ClienteController::class, 'destroy'])->name('cliente.delete');
 
 Route::get('item/index', [ItemController::class, 'index'])->name('items');
 Route::get('item/create', [ItemController::class, 'create'])->name('item.create');

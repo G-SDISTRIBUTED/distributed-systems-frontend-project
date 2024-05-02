@@ -4,16 +4,12 @@ namespace App\DataTables;
 
 use App\Models\Cliente;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use PgSql\Lob;
 use Yajra\DataTables\CollectionDataTable;
 
 class ClientesDataTable extends DataTable
@@ -36,11 +32,10 @@ class ClientesDataTable extends DataTable
         $dataTable = new CollectionDataTable(collect($clientes));
 
         $dataTable->addColumn('actions', function ($cliente) {
-            Log::info("Cliente mandado: ".json_encode($cliente));
-                    return $this->getActions($cliente['ci'], 'cliente/', '', 'enable', '')
-                    . ' ' . $this->getActionDelete($cliente['ci'], 'cliente.','enable');
-            });
-            $dataTable->rawColumns(['actions']);
+            return $this->getActions($cliente['ci'], 'cliente/', 'cliente.', 'enable', '')
+                . ' ' . $this->getActionDelete($cliente['ci'], 'cliente.', 'enable');
+        });
+        $dataTable->rawColumns(['actions']);
 
         return $dataTable;
     }
@@ -64,21 +59,21 @@ class ClientesDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('clientes-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->lengthMenu([5,10, 15, 20])
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('clientes-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            //->dom('Bfrtip')
+            ->orderBy(1)
+            ->lengthMenu([5, 10, 15, 20])
+            ->selectStyleSingle()
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            ]);
     }
 
     /**
@@ -107,20 +102,20 @@ class ClientesDataTable extends DataTable
         return 'Clientes_' . date('YmdHis');
     }
 
-    protected function getActions($id, $url,$route,$state,$model)
+    protected function getActions($id, $url, $route, $state, $model)
     {
-        $actionShow='<a href="' . $url . 'show/'. $id . '" class="btn btn-xs btn-info" data-toggle="tooltip" 
+        $actionShow = '<a href="' . route($route . 'show', ['ci' => $id]) . '" class="btn btn-xs btn-info" data-toggle="tooltip" 
                 title="' . __('messages.general.show') . '"><i class="fa fa-eye"></i></a> ';
 
-        $actionEdit='<a href="' . $url . 'edit/'.$id. '" class="btn btn-xs btn-warning" data-toggle="tooltip" 
-                 title="' . __('messages.general.edit') . '"><i class="fa fa-pencil-square-o"></i></a>';
+        $actionEdit = '<a href="' . route($route . 'edit', ['ci' => $id]) . '" class="btn btn-xs btn-warning" data-toggle="tooltip" 
+                title="' . __('messages.general.edit') . '"><i class="fa fa-pencil-square-o"></i></a>';
 
-        return $actionShow." ".$actionEdit;
+        return $actionShow . " " . $actionEdit;
     }
 
-    public function getActionDelete($id, $route,$state)
+    public function getActionDelete($id, $route, $state)
     {
-        $actionDelete='<a onclick="validateDeleteAction(\'delete-form-' . $id . '\')"
+        $actionDelete = '<a onclick="validateDeleteAction(\'delete-form-' . $id . '\')"
                     class="btn btn-xs btn-danger" data-toggle="tooltip" title="' . __('messages.general.delete') . '">
                     <i class="fa fa-trash"></i>
                 </a>

@@ -30,23 +30,19 @@
         <div style="height: 25px;"></div>
         <div class="row mt-4">
             <div class="col-lg-6">
-                <form action="{{ route('cliente.index') }}" method="GET" style="width: 350px;">
+                <form action="{{ route('items') }}" method="GET" style="width: 350px;">
                     @csrf
                     <div class="form-group" style="margin-bottom: 15px;">
-                        <label for="ci">CI:</label>
-                        <input type="text" name="ci" class="form-control" placeholder="CI" value="{{$cliente['ci']}}" readonly>
+                        <label for="id">ID:</label>
+                        <input type="text" name="id" class="form-control" placeholder="id" value="{{$item['id']}}" readonly>
                     </div>
                     <div class="form-group">
                         <label for="nombre">Nombre:</label>
-                        <input type="text" name="nombre" class="form-control" placeholder="Nombre" value="{{$cliente['nombre']}}" readonly>
+                        <input type="text" name="nombre" class="form-control" placeholder="Nombre" value="{{$item['nombre']}}" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="direccion">Dirección:</label>
-                        <input type="text" name="direccion" class="form-control" placeholder="Dirección" value="{{$cliente['direccion']}}" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="telefono">Teléfono:</label>
-                        <input type="text" name="telefono" class="form-control" placeholder="Teléfono" value="{{$cliente['telefono']}}" readonly>
+                        <label for="descripcion">Descripción:</label>
+                        <input type="text" name="descripcion" class="form-control" placeholder="Descripción" value="{{$item['descripcion']}}" readonly>
                     </div>
                     <button type="submit" class="btn btn-primary">Volver</button>
                 </form>

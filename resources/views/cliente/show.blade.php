@@ -30,7 +30,7 @@
         <div style="height: 25px;"></div>
         <div class="row mt-4">
             <div class="col-lg-6">
-                <form action="{{ route('cliente.index') }}" method="GET" style="width: 350px;">
+                <form action="{{ route('clientes') }}" method="GET" style="width: 350px;">
                     @csrf
                     <div class="form-group" style="margin-bottom: 15px;">
                         <label for="ci">CI:</label>

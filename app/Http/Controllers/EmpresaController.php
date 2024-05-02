@@ -21,7 +21,6 @@ class EmpresaController extends Controller
 
     public function store(Request $request)
     {
-        Log::info("llega");
         try{
             $response = Http::post('http://127.0.0.1:8000/api/servicios', [
                 'clase' => 'empresa',

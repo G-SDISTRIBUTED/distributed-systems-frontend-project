@@ -19,7 +19,10 @@
     <div style="height: 20px;"></div>
         <div class="row mt-4">
             <div class="col-lg-12">
-                <a href="{{ route('item.create') }}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Añadir Item</a>
+            <div class="pull-right">
+                <a href="{{ route('home') }}" class="btn btn-primary">Volver</a>
+                <a href="{{ route('item.create') }}" class="btn btn-primary">Añadir Item</a>
+            </div>
             </div>
         </div>
         <div style="height: 25px;"></div>

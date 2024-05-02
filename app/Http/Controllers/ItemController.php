@@ -21,7 +21,6 @@ class ItemController extends Controller
 
     public function store(Request $request)
     {
-        Log::info("llega");
         try{
             $response = Http::post('http://127.0.0.1:8000/api/servicios', [
                 'clase' => 'item',
@@ -69,7 +68,7 @@ class ItemController extends Controller
         ); 
         $jsonResponse = $response->json();
 
-        return  redirect()->route('item.index')->withErrors($jsonResponse['message']);
+        return  redirect()->route('items');
     }
     public function destroy($id)
     {
@@ -80,7 +79,7 @@ class ItemController extends Controller
         );
         $jsonResponse = $response->json();
 
-        return  redirect()->route('item.index')->withErrors($jsonResponse['message']);
+        return  redirect()->route('items');
     }
 }
 

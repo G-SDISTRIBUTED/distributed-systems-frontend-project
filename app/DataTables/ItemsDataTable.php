@@ -36,8 +36,7 @@ class ItemsDataTable extends DataTable
         $dataTable = new CollectionDataTable(collect($clientes));
 
         $dataTable->addColumn('actions', function ($cliente) {
-            Log::info("Item mandado: ".json_encode($cliente));
-                    return $this->getActions($cliente['id'], 'item/', '', 'enable', '')
+                    return $this->getActions($cliente['id'], 'item/', 'item.', 'enable', '')
                     . ' ' . $this->getActionDelete($cliente['id'], 'item.','enable');
             });
             $dataTable->rawColumns(['actions']);
@@ -106,15 +105,15 @@ class ItemsDataTable extends DataTable
         return 'Items_' . date('YmdHis');
     }
 
-    protected function getActions($id, $url,$route,$state,$model)
+    protected function getActions($id, $url, $route, $state, $model)
     {
-        $actionShow='<a href="' . $url . 'show/'. $id . '" class="btn btn-xs btn-info" data-toggle="tooltip" 
+        $actionShow = '<a href="' . route($route . 'show', ['id' => $id]) . '" class="btn btn-xs btn-info" data-toggle="tooltip" 
                 title="' . __('messages.general.show') . '"><i class="fa fa-eye"></i></a> ';
 
-        $actionEdit='<a href="' . $url . 'edit/'.$id. '" class="btn btn-xs btn-warning" data-toggle="tooltip" 
-                 title="' . __('messages.general.edit') . '"><i class="fa fa-pencil-square-o"></i></a>';
+        $actionEdit = '<a href="' . route($route . 'edit', ['id' => $id]) . '" class="btn btn-xs btn-warning" data-toggle="tooltip" 
+                title="' . __('messages.general.edit') . '"><i class="fa fa-pencil-square-o"></i></a>';
 
-        return $actionShow." ".$actionEdit;
+        return $actionShow . " " . $actionEdit;
     }
 
     public function getActionDelete($id, $route,$state)

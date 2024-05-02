@@ -49,7 +49,7 @@
                     </div>
                     <div class="form-group">
                         <label for="descripcion">Descripción:</label>
-                        <input type="text" name="descripcion" class="form-control" placeholder="Dirección">
+                        <input type="text" name="descripcion" class="form-control" placeholder="Descripción">
                         @error('descripcion')
                             <p style="color:red;">{{ $message }}</p>
                         @enderror

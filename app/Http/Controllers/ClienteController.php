@@ -64,7 +64,7 @@ class ClienteController extends Controller
         ); 
         $jsonResponse = $response->json();
 
-        return  redirect()->route('item.index')->withErrors($jsonResponse['message']);
+        return  redirect()->route('clientes');
     }
     public function destroy($ci)
     {
@@ -75,6 +75,6 @@ class ClienteController extends Controller
         );
         $jsonResponse = $response->json();
 
-        return  redirect()->route('item.index')->withErrors($jsonResponse['message']);
+        return  redirect()->route('clientes');
     }
 }

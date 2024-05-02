@@ -147,7 +147,7 @@ body {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
+    background: #2f4050;
     color: #fff;
     transition: all 0.3s;
 }
@@ -158,7 +158,7 @@ body {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: #2f4050;
 }
 
 #sidebar ul.components {
@@ -167,7 +167,7 @@ body {
 }
 
 #sidebar ul p {
-    color: #fff;
+    color: #5e5b5b;
     padding: 10px;
 }
 
@@ -181,7 +181,7 @@ body {
 
 #sidebar ul li a:hover {
     color: #7386D5;
-    background: #fff;
+    background: #5e5b5b;
 }
 
 #content {
@@ -189,4 +189,5 @@ body {
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
+    background: #e6e9eb;
 }

@@ -60,23 +60,19 @@ class MainController extends Controller
 
     public function storeItem(Request $request)
     {
-        Log::info("llega");
         try{
             $response = Http::post('http://127.0.0.1:8000/api/servicios', [
                 'clase' => 'item',
                 'funcion' => 'store',
                 'data'=>request(['id', 'nombre', 'descripcion'])]
             );
-            Log::info("llega2");
             $jsonResponse = $response->json();
-            Log::info("llega3: ".json_encode($jsonResponse));
             if ($response->successful()) {
                 return redirect()->route('items');
             } else {
                 return redirect()->back()->withErrors($jsonResponse['message']);
             }
             
-            Log::info("llega4");
         }catch(Exception $e){
             return redirect()->back()->withErrors($e->getMessage());
         }

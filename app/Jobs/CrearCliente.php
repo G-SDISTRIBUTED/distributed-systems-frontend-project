@@ -40,6 +40,5 @@ class CrearCliente implements ShouldQueue
         Http::timeout(60)->post('http://127.0.0.1:8000/api/clientes', [$ci, $nombre, $direccion, $telefono]);
 
         sleep(5);
-        Log::info('Trabajo de prueba ejecutado.');
     }
 }

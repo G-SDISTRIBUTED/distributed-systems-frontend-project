@@ -36,7 +36,6 @@ class EmpresasDataTable extends DataTable
         $dataTable = new CollectionDataTable(collect($empresas));
 
         $dataTable->addColumn('actions', function ($empresa) {
-            Log::info("Empresa mandado: ".json_encode($empresa));
                     return $this->getActions($empresa['id'], 'empresa/', '', 'enable', '')
                     . ' ' . $this->getActionDelete($empresa['id'], 'empresa.','enable');
             });
