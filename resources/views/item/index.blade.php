@@ -36,6 +36,24 @@
                 </div>
             </div>
         </div>
+        @if(isset($mensajes))
+        @foreach($mensajes as $mensaje)
+        <div class="alert alert-success" id="mensaje">
+            <form method="post" action="{{route('mensaje.delete', $mensaje->id)}}">
+                @csrf
+                <button type="submit" id="cerrarMensaje" class="btn btn-link" style="
+        float: right;
+        font-size: 27px;
+        font-weight: bold;
+        background-color: transparent;
+        border: none;
+        ">&times;</button>
+
+            </form>
+            {{ $mensaje->mensaje }}
+        </div>
+        @endforeach
+    @endif
     </div>
 
     <script src="{{ asset('vendor/datatables/dataTables.buttons.min.js') }}"></script>

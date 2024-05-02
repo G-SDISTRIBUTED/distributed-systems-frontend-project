@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\RespuestaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,3 +40,5 @@ Route::get('empresa/show/{id}', [EmpresaController::class, 'show'])->name('empre
 Route::get('empresa/edit/{id}', [EmpresaController::class, 'edit'])->name('empresa.edit');
 Route::post('empresa/update/{id}', [EmpresaController::class, 'update'])->name('empresa.update');
 Route::post('empresa/delete/{id}', [EmpresaController::class, 'destroy'])->name('empresa.delete');
+
+Route::post('mensaje/delete/{id}', [RespuestaController::class, 'destroy'])->name('mensaje.delete');

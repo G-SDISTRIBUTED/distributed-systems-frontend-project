@@ -6,12 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use App\Models\Mensaje;
 
 class ClienteController extends Controller
 {
     public function index(ClientesDataTable $dataTable)
     {
-        return $dataTable->render('cliente.index');
+        $mensajes = Mensaje::all();
+        return $dataTable->render('cliente.index', compact('mensajes'));
+        //return $dataTable->render('cliente.index');
     }
     public function create()
     {
@@ -23,7 +26,8 @@ class ClienteController extends Controller
             $response = Http::post('http://127.0.0.1:8000/api/servicios', [
                 'clase' => 'cliente',
                 'funcion' => 'store',
-                'data'=>request(['ci', 'nombre', 'direccion', 'telefono'])]
+                'data'=>request(['ci', 'nombre', 'direccion', 'telefono']), 
+                'webhook' => 'http://127.0.0.1:8001/api/respuesta']
             );
             $jsonResponse = $response->json();
     
@@ -58,7 +62,8 @@ class ClienteController extends Controller
             'funcion' => 'update',
             'data'=> [
             'ci' => $ci, 
-            'request' => request(['nombre', 'direccion', 'telefono'])
+            'request' => request(['nombre', 'direccion', 'telefono']), 
+            'webhook' => 'http://127.0.0.1:8001/api/respuesta'
         ]
         ]
         ); 
@@ -71,7 +76,8 @@ class ClienteController extends Controller
         $response = Http::post('http://127.0.0.1:8000/api/servicios', [
             'clase' => 'cliente',
             'funcion' => 'destroy',
-            'data'=> $ci]
+            'data'=> $ci, 
+            'webhook' => 'http://127.0.0.1:8001/api/respuesta']
         );
         $jsonResponse = $response->json();
 
