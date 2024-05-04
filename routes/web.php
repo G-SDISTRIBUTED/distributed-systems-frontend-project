@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () { return view('welcome');})->name('home');
+Route::get('/', [MainController::class, 'index'])->name('home');
+
 Route::get('cliente/index', [ClienteController::class, 'index'])->name('clientes');
 Route::get('cliente/create', [ClienteController::class, 'create'])->name('cliente.create');
 Route::post('cliente/create', [ClienteController::class, 'store'])->name('cliente.store');

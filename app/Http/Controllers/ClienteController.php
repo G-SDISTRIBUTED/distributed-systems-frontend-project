@@ -26,6 +26,7 @@ class ClienteController extends Controller
                 'data'=>request(['ci', 'nombre', 'direccion', 'telefono'])]
             );
             $jsonResponse = $response->json();
+            Log::info('HTTP Response: '. json_encode($jsonResponse));
     
             if ($response->successful()) {
                 return redirect()->route('clientes');
