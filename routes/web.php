@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ClaseController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\RespuestaController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,8 +18,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () { return view('welcome');})->name('home');
-Route::get('cliente/index', [ClienteController::class, 'index'])->name('clientes');
+Route::get('/', [MainController::class, 'index'])->name('home');Route::get('cliente/index', [ClienteController::class, 'index'])->name('clientes');
 Route::get('cliente/create', [ClienteController::class, 'create'])->name('cliente.create');
 Route::post('cliente/create', [ClienteController::class, 'store'])->name('cliente.store');
 Route::get('cliente/show/{ci}', [ClienteController::class, 'show'])->name('cliente.show');
@@ -40,5 +41,13 @@ Route::get('empresa/show/{id}', [EmpresaController::class, 'show'])->name('empre
 Route::get('empresa/edit/{id}', [EmpresaController::class, 'edit'])->name('empresa.edit');
 Route::post('empresa/update/{id}', [EmpresaController::class, 'update'])->name('empresa.update');
 Route::post('empresa/delete/{id}', [EmpresaController::class, 'destroy'])->name('empresa.delete');
+
+Route::get('clase/index', [ClaseController::class, 'index'])->name('clases');
+Route::get('clase/create', [ClaseController::class, 'create'])->name('clase.create');
+Route::post('clase/create', [ClaseController::class, 'store'])->name('clase.store');
+Route::get('clase/show/{id}', [ClaseController::class, 'show'])->name('clase.show');
+Route::get('clase/edit/{id}', [ClaseController::class, 'edit'])->name('clase.edit');
+Route::post('clase/update/{id}', [ClaseController::class, 'update'])->name('clase.update');
+Route::post('clase/delete/{id}', [ClaseController::class, 'destroy'])->name('clase.delete');
 
 Route::post('mensaje/delete/{id}', [RespuestaController::class, 'destroy'])->name('mensaje.delete');

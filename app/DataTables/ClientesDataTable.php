@@ -22,7 +22,7 @@ class ClientesDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): CollectionDataTable
     {
-        $response = Http::get('http://127.0.0.1:8000/api/clientes', [
+        $response = Http::get(env('URL_API_BACK').'/clientes', [
             'perPages' => 4,
             'pages' => 1,
         ]);

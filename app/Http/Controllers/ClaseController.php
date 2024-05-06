@@ -1,38 +1,37 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\DataTables\ClientesDataTable;
+use App\DataTables\ClasesDataTable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use App\Models\Mensaje;
 
-class ClienteController extends Controller
+class ClaseController extends Controller
 {
-    public function index(ClientesDataTable $dataTable)
+    public function index(ClasesDataTable $dataTable)
     {
         $mensajes = Mensaje::all();
-        return $dataTable->render('cliente.index', compact('mensajes'));
-        //return $dataTable->render('cliente.index');
+        return $dataTable->render('clase.index', compact('mensajes'));
     }
     public function create()
     {
-        return view('cliente.create');
+        return view('clase.create');
     }
     public function store(Request $request)
     {
         try{
             $response = Http::post(env('URL_API_BACK').'/servicios', [
-                'clase' => 'cliente',
+                'clase' => 'clase',
                 'funcion' => 'store',
-                'data'=>request(['ci', 'nombre', 'direccion', 'telefono']), 
+                'data'=>request(['id', 'nombre', 'descripcion']), 
                 'webhook' => env('URL_API_FRONT').'/respuesta']
             );
             $jsonResponse = $response->json();
     
             if ($response->successful()) {
-                return redirect()->route('clientes');
+                return redirect()->route('clases');
             } else {
                 return redirect()->back()->withErrors($jsonResponse['message']);
             } 
@@ -40,46 +39,46 @@ class ClienteController extends Controller
             return redirect()->back()->withErrors($e->getMessage());
         }
     }
-    public function show($ci)
+    public function show($id)
     {
-        $response = Http::get(env('URL_API_BACK').'/clientes/' . $ci);
+        $response = Http::get(env('URL_API_BACK').'/clases/' . $id);
         $jsonResponse = $response->json();
-        $cliente = isset($jsonResponse['data']) ? $jsonResponse['data'] : null;
-        return view('cliente.show', compact('cliente'));
+        $clase = isset($jsonResponse['data']) ? $jsonResponse['data'] : null;
+        return view('clase.show', compact('clase'));
     }
 
-    public function edit($ci)
+    public function edit($id)
     {
-        $response = Http::get(env('URL_API_BACK').'/clientes/' . $ci);
+        $response = Http::get(env('URL_API_BACK').'/clases/' . $id);
         $jsonResponse = $response->json();
-        $cliente = isset($jsonResponse['data']) ? $jsonResponse['data'] : null;
-        return view('cliente.edit', compact('cliente'));
+        $clase = isset($jsonResponse['data']) ? $jsonResponse['data'] : null;
+        return view('clase.edit', compact('clase'));
     }
-    public function update(Request $request, $ci)
+    public function update(Request $request, $id)
     {
         $response = Http::post(env('URL_API_BACK').'/servicios', [
-            'clase' => 'cliente',
+            'clase' => 'clase',
             'funcion' => 'update',
             'data'=> [
-                'ci' => $ci, 
-                'request' => request(['nombre', 'direccion', 'telefono'])], 
+                'id' => $id, 
+                'request' => request(['nombre', 'descripcion'])], 
             'webhook' => env('URL_API_FRONT').'/respuesta'
         ]
         ); 
         $jsonResponse = $response->json();
 
-        return  redirect()->route('clientes');
+        return  redirect()->route('clases');
     }
-    public function destroy($ci)
+    public function destroy($id)
     {
         $response = Http::post(env('URL_API_BACK').'/servicios', [
-            'clase' => 'cliente',
+            'clase' => 'clase',
             'funcion' => 'destroy',
-            'data'=> $ci, 
+            'data'=> $id, 
             'webhook' => env('URL_API_FRONT').'/respuesta']
         );
         $jsonResponse = $response->json();
 
-        return  redirect()->route('clientes');
+        return  redirect()->route('clases');
     }
 }

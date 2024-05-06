@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Log;
 use PgSql\Lob;
 use Yajra\DataTables\CollectionDataTable;
 
-class ItemsDataTable extends DataTable
+class ClasesDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -26,7 +26,7 @@ class ItemsDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): CollectionDataTable
     {
-        $response = Http::get(env('URL_API_BACK').'/items', [
+        $response = Http::get(env('URL_API_BACK').'/clases', [
             'perPages' => 4,
             'pages' => 1,
         ]);
@@ -36,8 +36,8 @@ class ItemsDataTable extends DataTable
         $dataTable = new CollectionDataTable(collect($clientes));
 
         $dataTable->addColumn('actions', function ($cliente) {
-                    return $this->getActions($cliente['id'], 'item/', 'item.', 'enable', '')
-                    . ' ' . $this->getActionDelete($cliente['id'], 'item.','enable');
+                    return $this->getActions($cliente['id'], 'clase/', 'clase.', 'enable', '')
+                    . ' ' . $this->getActionDelete($cliente['id'], 'clase.','enable');
             });
             $dataTable->rawColumns(['actions']);
 
@@ -63,7 +63,7 @@ class ItemsDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('items-table')
+                    ->setTableId('clases-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
@@ -102,7 +102,7 @@ class ItemsDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Items_' . date('YmdHis');
+        return 'Clases_' . date('YmdHis');
     }
 
     protected function getActions($id, $url, $route, $state, $model)

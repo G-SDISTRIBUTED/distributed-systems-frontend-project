@@ -24,11 +24,11 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         try{
-            $response = Http::post('http://127.0.0.1:8000/api/servicios', [
+            $response = Http::post(env('URL_API_BACK').'/servicios', [
                 'clase' => 'item',
                 'funcion' => 'store',
                 'data'=>request(['id', 'nombre', 'descripcion']), 
-                'webhook' => 'http://127.0.0.1:8001/api/respuesta'
+                'webhook' => env('URL_API_FRONT').'/respuesta'
                 ]
             );
             $jsonResponse = $response->json();
@@ -61,13 +61,13 @@ class ItemController extends Controller
 
     public function update(Request $request, $id)
     {
-        $response = Http::post('http://127.0.0.1:8000/api/servicios', [
+        $response = Http::post(env('URL_API_BACK').'/servicios', [
             'clase' => 'item',
             'funcion' => 'update',
             'data'=> [
                 'id' => $id, 
                 'request' => request(['nombre', 'descripcion'])
-            ], 'webhook' => 'http://127.0.0.1:8001/api/respuesta'
+            ], 'webhook' => env('URL_API_FRONT').'/respuesta'
         ]
         ); 
         $jsonResponse = $response->json();
@@ -76,11 +76,11 @@ class ItemController extends Controller
     }
     public function destroy($id)
     {
-        $response = Http::post('http://127.0.0.1:8000/api/servicios', [
+        $response = Http::post(env('URL_API_BACK').'/servicios', [
             'clase' => 'item',
             'funcion' => 'destroy',
             'data'=> $id, 
-            'webhook' => 'http://127.0.0.1:8001/api/respuesta']
+            'webhook' => env('URL_API_FRONT').'/respuesta']
         );
         $jsonResponse = $response->json();
 

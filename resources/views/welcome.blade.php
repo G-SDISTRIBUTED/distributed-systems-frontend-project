@@ -15,6 +15,7 @@
             <ul class="list-unstyled components">
                 <li><a href="{{ route('clientes') }}">Clientes</a></li>
                 <li><a href="{{ route('items') }}">Items</a></li>
+                <li><a href="{{ route('clases') }}">Clases</a></li>
             </ul>
         </nav>
 
