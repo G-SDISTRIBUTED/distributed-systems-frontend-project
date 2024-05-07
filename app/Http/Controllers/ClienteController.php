@@ -14,7 +14,6 @@ class ClienteController extends Controller
     {
         $mensajes = Mensaje::all();
         return $dataTable->render('cliente.index', compact('mensajes'));
-        //return $dataTable->render('cliente.index');
     }
     public function create()
     {

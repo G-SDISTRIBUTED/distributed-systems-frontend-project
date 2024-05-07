@@ -6,6 +6,7 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\RespuestaController;
+use App\Http\Controllers\ServiciosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [MainController::class, 'index'])->name('home');Route::get('cliente/index', [ClienteController::class, 'index'])->name('clientes');
+Route::get('/', [MainController::class, 'index'])->name('home');
+Route::get('cliente/index', [ClienteController::class, 'index'])->name('clientes');
 Route::get('cliente/create', [ClienteController::class, 'create'])->name('cliente.create');
 Route::post('cliente/create', [ClienteController::class, 'store'])->name('cliente.store');
 Route::get('cliente/show/{ci}', [ClienteController::class, 'show'])->name('cliente.show');
@@ -51,3 +53,4 @@ Route::post('clase/update/{id}', [ClaseController::class, 'update'])->name('clas
 Route::post('clase/delete/{id}', [ClaseController::class, 'destroy'])->name('clase.delete');
 
 Route::post('mensaje/delete/{id}', [RespuestaController::class, 'destroy'])->name('mensaje.delete');
+Route::get('/consultas', [ServiciosController::class, 'index'])->name('consultas');

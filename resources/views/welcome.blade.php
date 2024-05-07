@@ -13,9 +13,20 @@
                 <h3>Menú</h3>
             </div>
             <ul class="list-unstyled components">
-                <li><a href="{{ route('clientes') }}">Clientes</a></li>
-                <li><a href="{{ route('items') }}">Items</a></li>
-                <li><a href="{{ route('clases') }}">Clases</a></li>
+                <li class="submenu">
+                    <a href="#" data-toggle="collapse" aria-expanded="false">CRUD</a>
+                    <ul class="collapse list-unstyled" id="crudSubmenu">
+                        <li><a href="{{ route('clientes') }}">Clientes</a></li>
+                        <li><a href="{{ route('items') }}">Items</a></li>
+                        <li><a href="{{ route('clases') }}">Clases</a></li>
+                    </ul>
+                </li>
+                <li class="submenu">
+                    <a href="#" data-toggle="collapse" aria-expanded="false">Servicios</a>
+                    <ul class="collapse list-unstyled" id="servicesSubmenu">
+                        <li><a href="{{ route('consultas') }}">Consultas</a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
 
